@@ -3,17 +3,11 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { 
-    inputs,
-    outputs,
     lib,
     config,
     pkgs,
     ...
 }: {
-
-    imports = [
-        ./hardware-configuration.nix
-    ]; 
 
     nixpkgs = {
         overlays = [];
@@ -45,6 +39,7 @@
     networking.hostName = "alpheratz";
     networking.networkmanager.enable = true;
     networking.nameservers = [ "192.168.0.100" ];
+
     networking.firewall = {
         allowedUDPPorts = [ 51820 ];
     };
@@ -72,59 +67,6 @@
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
-    services.xserver.xkb.layout = "us";
-    services.xserver.xkb.options = "caps:escape";
-
-    fonts.packages = with pkgs; [
-        font-awesome
-    ];
-
-    security.rtkit.enable = true;
-    services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-    };
-
-    # List packages installed in system profile. To search, run:
-    environment.systemPackages = with pkgs; with outputs.packages.x86_64-linux; [
-        wget
-        curl
-        ldns
-        git
-        killall
-        vim
-        wl-clipboard
-        grim
-        slurp
-        waybar
-        alacritty
-        kickoff
-        firefox
-        bottom
-        eza
-        ripgrep
-        fzf
-        mpv
-        wireguard-tools
-        pulseaudio
-        eza
-        pavucontrol
-        kickoff-dot-desktop
-    ];
-
-    programs.sway.enable = true;
-    programs.fish.enable = true;
-    programs.thunar.enable = true;
-    programs.light.enable = true;
-
-    programs.neovim = {
-        enable = true;
-        defaultEditor = true;
-    };
-
-    xdg.portal.wlr.enable = true;
 
     # Define a user account.
     users.users.eesim = {
@@ -134,20 +76,8 @@
         shell = pkgs.fish;
     };
 
-    # List services that you want to enable:
-
-    # Enable the OpenSSH daemon.
-    # services.openssh.enable = true;
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    # services.xserver.libinput.enable = true;
-
     # Enable CUPS to print documents.
     # services.printing.enable = true;
-
-    # Enable sound.
-    # sound.enable = true;
-    # hardware.pulseaudio.enable = true;
 
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];
