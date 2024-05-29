@@ -64,6 +64,7 @@
             in
             {
                 kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix { };
+                gamescope = pkgs.callPackage ./pkgs/gamescope {};
             }
         );
     };

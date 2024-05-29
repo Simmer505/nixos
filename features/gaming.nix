@@ -2,10 +2,10 @@
     environment.systemPackages = with pkgs; [
         protonup-qt
         vesktop
+        localPackages.gamescope
     ];
 
     programs.steam = {
         enable = true;
-        gamescopeSession.enable = true;
     };
 }
