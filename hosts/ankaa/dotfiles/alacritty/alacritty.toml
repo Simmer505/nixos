@@ -1,0 +1,13 @@
+[font]
+size = 12
+
+[font.italic]
+family = "Codelia Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "Codelia Nerd Font"
+style = "Regular"
+
+#[shell]
+#program = "/usr/bin/fish"
