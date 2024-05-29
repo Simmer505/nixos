@@ -1,5 +1,6 @@
 Host gitea
     HostName git.simmer505.com
     User git
+    Port 222
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
