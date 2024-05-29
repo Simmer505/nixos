@@ -25,6 +25,9 @@
         enable = true;
         userName = "Ethan Simmons";
         userEmail  = "eesimmons9105@gmail.com";
+        extraConfig = {
+            core.sshCommand = "'ssh -i ~/.ssh/id_ed25519'";
+        };
     };
 
     programs.direnv = {
