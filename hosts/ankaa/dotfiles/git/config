@@ -1,6 +1,4 @@
-[core]
-    sshCommand = "ssh -i ~/.ssh/id_ed25519"
+core.sshCommand = "ssh -i ~/.ssh/id_ed25519"
 
-[user]
-    email = "eesimmons9105@gmail.com"
-    name = "Ethan Simmons"
+user.email = "eesimmons9105@gmail.com"
+user.name = "Ethan Simmons"
