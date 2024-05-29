@@ -49,9 +49,9 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "ValveSoftware";
     repo = "gamescope";
-    rev = "refs/tags/${finalAttrs.version}";
+    rev = "d0d23c4c3010c81add1bd90cbe478ce4a386e28d";
     fetchSubmodules = true;
-    hash = "sha256-tijFVOIMW+nkot/uRP0PNZBYZkZMMt1PcAN5+3SWzW4=";
+    hash = "sha256-Ym1kl9naAm1MGlxCk32ssvfiOlstHiZPy7Ga8EZegus=";
   };
 
   patches = [
@@ -71,6 +71,12 @@ stdenv.mkDerivation (finalAttrs: {
   mesonFlags = [
     (lib.mesonBool "enable_gamescope" enableExecutable)
     (lib.mesonBool "enable_gamescope_wsi_layer" enableWsi)
+    "-Dc_args=-fno-omit-frame-pointer"
+    "-Dc_link_args=-fno-omit-frame-pointer"
+    "-Dcpp_args=-fno-omit-frame-pointer"
+    "-Dcpp_link_args=-fno-omit-frame-pointer"
+    "--buildtype=debugoptimized"
+    "-Db_sanitize=address,undefined"
   ];
 
   # don't install vendored vkroots etc
