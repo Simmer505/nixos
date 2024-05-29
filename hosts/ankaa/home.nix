@@ -26,7 +26,7 @@
         userName = "Ethan Simmons";
         userEmail  = "eesimmons9105@gmail.com";
         extraConfig = {
-            core.sshCommand = "'ssh -i /home/eesim/.ssh/id_ed25519'";
+            core.sshCommand = "ssh -i /home/eesim/.ssh/id_ed25519";
         };
     };
 
