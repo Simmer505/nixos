@@ -3,7 +3,8 @@
         protonup-qt
         vesktop
         lutris
-        gamescope-old
+        gamescope-dbg
+        wine
     ];
 
     programs.steam = {

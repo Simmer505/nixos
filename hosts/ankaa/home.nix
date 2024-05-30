@@ -38,9 +38,9 @@
 
     gtk = {
         enable = true;
-        cursorTheme = {
-            name = "phinger-cursors-dark";
-            package = pkgs.phinger-cursors;
+        iconTheme = {
+            name = "awaida-dark";
+            package = pkgs.gnome.adwaita-icon-theme;
         };
         theme = {
             name = "adw-gtk3-dark";
