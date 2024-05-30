@@ -68,15 +68,10 @@ stdenv.mkDerivation (finalAttrs: {
     substituteInPlace src/reshade_effect_manager.cpp --replace "@out@" "$out"
   '';
 
+
   mesonFlags = [
     (lib.mesonBool "enable_gamescope" enableExecutable)
     (lib.mesonBool "enable_gamescope_wsi_layer" enableWsi)
-    "-Dc_args=-fno-omit-frame-pointer"
-    "-Dc_link_args=-fno-omit-frame-pointer"
-    "-Dcpp_args=-fno-omit-frame-pointer"
-    "-Dcpp_link_args=-fno-omit-frame-pointer"
-    "--buildtype=debugoptimized"
-    "-Db_sanitize=address,undefined"
   ];
 
   # don't install vendored vkroots etc
@@ -137,7 +132,8 @@ stdenv.mkDerivation (finalAttrs: {
   postInstall = lib.optionalString enableExecutable ''
     # using patchelf unstable because the stable version corrupts the binary
     ${lib.getExe patchelfUnstable} $out/bin/gamescope \
-      --add-rpath ${vulkan-loader}/lib --add-needed libvulkan.so.1
+      --add-rpath ${vulkan-loader}/lib \
+      --add-needed libvulkan.so.1 \
 
     # --debug-layers flag expects these in the path
     wrapProgram "$out/bin/gamescope" \
