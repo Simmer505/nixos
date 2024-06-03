@@ -3,7 +3,7 @@
         protonup-qt
         vesktop
         lutris
-        gamescope-dbg
+        gamescope-old
         wine
     ];
 

@@ -9,51 +9,100 @@
 
     outputs = inputs@{ self, nixpkgs, home-manager, ... }: let
         inherit (self) outputs;
-    in {
+
+        hostname = 
+            if (builtins.pathExists ./hostname) then
+                builtins.readFile(./hostname)
+            else
+                "default-hostname";
+
+        configs."ankaa" = {
+            openssh = {
+                enable = true;
+                port = 2222;
+            };
+
+            backup = {
+                enable = true;
+                user = "eesim";
+                paths = [ "/home/eesim" ];
+                repo = "rf030789@rf030789.repo.borgbase.com:repo";
+                excludes = [ 
+                    "/home/eesim/.local/share/Steam/steamapps/common"
+                    "/home/eesim/.cache"
+                ];
+                passphrase = "/home/eesim/.ssh/borgbase_passphrase";
+                key = "/home/eesim/.ssh/id_ed25519_borgbase";
+                repeat = "daily";
+            };
+
+            audio = {
+                pipewire.enable = true;
+                music.enable = true;
+                tools = {
+                    helvum = true;
+                    easyeffects = true;
+                };
+            };
+            
+            gui = {
+                enable = true;
+                protonmail = true;
+                matrix = true;
+            };
+
+            games.enable = true;
+
+            common.nil.enable = true;
+
+            networking.wireguard.enable = true;
+
+        };
+
+        configs."alpheratz" = {
+            audio = {
+                pipewire.enable = true;
+                music.enable = true;
+
+                gui = {
+                    enable = true;
+                    protonmail = true;
+                    matrix = true;
+                };
+            };
+
+            common.nil.enable = true;
+
+            networking.wireguard.enable = true;
+        };
+
+        configs."default-hostname" = {
+
+        };
+
+        in {
         nixosConfigurations = {
-            ankaa = nixpkgs.lib.nixosSystem {
+            "${hostname}" = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = {
                     inherit (outputs) localPackages;
-                    openssh-port = 2222;
                 };
                 modules = [
-                    ./hosts/ankaa/configuration.nix
-                    ./hosts/ankaa/hardware-configuration.nix
-                    ./features/audio.nix
-                    ./features/common.nix
-                    ./features/gui.nix
-                    ./features/networking.nix
-                    ./features/gaming.nix
-                    ./modules/backups/home-ankaa.nix
-                    ./modules/openssh.nix
+                    {
+                        networking.hostName = hostname;
+                    }
+                    (import ./modules/nix)
+                    {
+                        simmer = configs."${hostname}";
+                    }
+                    (./. + "/hosts/${hostname}/system.nix")
+                    (./. + "/hosts/${hostname}/hardware-configuration.nix")
                     home-manager.nixosModules.home-manager
                     {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
 
-                        home-manager.users.eesim = import ./hosts/ankaa/home.nix;
-                    }
-                ];
-            };
-            alpheratz = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
-                specialArgs = {
-                    inherit (outputs) localPackages;
-                };
-                modules = [
-                    ./hosts/alpheratz/configuration.nix
-                    ./hosts/alpheratz/hardware-configuration.nix
-                    ./features/common.nix
-                    ./features/gui.nix
-                    ./features/audio.nix
-                    ./features/networking.nix
-                    ./features/laptop.nix
-                    home-manager.nixosModules.home-manager
-                    {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;
-                        home-manager.users.eesim = import ./hosts/alpheratz/home.nix;
+                        home-manager.users.eesim = import (./. + "/hosts/${hostname}/home.nix");
                     }
                 ];
             };

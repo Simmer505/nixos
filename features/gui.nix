@@ -12,10 +12,18 @@
         wayland-pipewire-idle-inhibit
         firefox
         mpv
+        cinny-desktop
+        thunderbird
+        protonmail-bridge
+        libsecret
     ];
 
     programs.sway.enable = true;
     programs.thunar.enable = true;
+    programs.dconf.enable = true;
+
+    services.gnome.gnome-keyring.enable = true;
+    services.dbus.packages = [ pkgs.gnome.seahorse ];
 
     xdg.portal.wlr.enable = true;
 

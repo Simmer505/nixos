@@ -144,6 +144,8 @@ stdenv.mkDerivation (finalAttrs: {
       --add-needed ${libgcc.lib}/lib/libasan.so.8 \
       --add-needed libvulkan.so.1
 
+    LD_PRELOAD="${libgcc.lib}/lib/libasan.so.8"
+
     # --debug-layers flag expects these in the path
     wrapProgram "$out/bin/gamescope" \
       --prefix PATH : ${with xorg; lib.makeBinPath [xprop xwininfo]}

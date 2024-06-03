@@ -33,10 +33,6 @@
         "/nix".options = [ "compress=zstd" "noatime" ];
     };
 
-    networking.hostName = "ankaa";
-    networking.networkmanager.enable = true;
-    networking.nameservers = [ "192.168.0.100" ];
-
     # Set your time zone.
     time.timeZone = "America/Chicago";
 

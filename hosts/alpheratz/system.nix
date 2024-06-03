@@ -36,13 +36,6 @@
         "/nix".options = [ "compress=zstd" "noatime" ];
     };
 
-    networking.hostName = "alpheratz";
-    networking.networkmanager.enable = true;
-    networking.nameservers = [ "192.168.0.100" ];
-
-    networking.firewall = {
-        allowedUDPPorts = [ 51820 ];
-    };
     networking.wg-quick.interfaces = {
         wg0 = {
             address = [ "10.6.0.5" ];
@@ -55,7 +48,7 @@
                     publicKey = "pEWHugUnnhWXkJzCIhXryRRZMoCAuvAITDeP4ItenQk=";
                     presharedKeyFile = "/root/wireguard-keys/wg0/preshared";
                     allowedIPs = [ "10.2.0.0/24" "192.168.0.0/24" ];
-                    endpoint = "jellyfin.simmer505.com:51820";
+                    endpoint = "simmer505.com:51820";
                     persistentKeepalive = 25;
                 }
             ];
