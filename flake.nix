@@ -10,13 +10,9 @@
     outputs = inputs@{ self, nixpkgs, home-manager, ... }: let
         inherit (self) outputs;
 
-        hostname = 
-            if (builtins.pathExists ./hostname) then
-                builtins.readFile(./hostname)
-            else
-                "default-hostname";
-
         configs."ankaa" = {
+            system = "x86_64-linux";
+            
             openssh = {
                 enable = true;
                 port = 2222;
@@ -49,6 +45,27 @@
                 enable = true;
                 protonmail = true;
                 matrix = true;
+
+                sway = {
+                    enable = true;
+                    desktop = true;
+                };
+
+                monitors = pkgs.lib.mkMerge [
+                    (utils.mkMonitor {
+                        monitor = "DP-2";
+                        resolution = "3440x1440";
+                        refreshRate = 144;
+                        x = 1920;
+                        wallpaper = "ship_moon.png";
+                    })
+                    (utils.mkMonitor {
+                        monitor = "HDMI-A-1";
+                        resolution = "1920x1080";
+                        refreshRate = 75;
+                    })
+                ];
+
             };
 
             games.enable = true;
@@ -57,9 +74,12 @@
 
             networking.wireguard.enable = true;
 
+
         };
 
         configs."alpheratz" = {
+            system = "x86_64-linux";
+            
             audio = {
                 pipewire.enable = true;
                 music.enable = true;
@@ -68,6 +88,13 @@
                     enable = true;
                     protonmail = true;
                     matrix = true;
+
+                    monitors = utils.mkMonitor {
+                        monitor = "eDP-1";
+                        resolution = "1920x1200";
+                        refreshRate = 60;
+                    };
+
                 };
             };
 
@@ -80,10 +107,21 @@
 
         };
 
+        hostname = 
+            if (builtins.pathExists ./hostname) then
+                builtins.readFile(./hostname)
+            else
+                "default-hostname";
+
+        utils = import ./utils;
+        system = configs."${hostname}".system;
+        pkgs = nixpkgs.legacyPackages.${system};
+
+
+
         in {
         nixosConfigurations = {
             "${hostname}" = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
                 specialArgs = {
                     inherit (outputs) localPackages;
                 };
@@ -101,6 +139,10 @@
                     {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
+                        home-manager.extraSpecialArgs = { 
+                            systemConfig = configs."${hostname}";
+                            inherit utils;
+                        };
 
                         home-manager.users.eesim = import (./. + "/hosts/${hostname}/home.nix");
                     }
@@ -108,9 +150,6 @@
             };
         };
         localPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system:
-            let
-                pkgs = nixpkgs.legacyPackages.${system};
-            in
             {
                 kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix { };
                 gamescope-old = pkgs.callPackage ./pkgs/gamescope-old {};

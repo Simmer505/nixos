@@ -17,16 +17,31 @@ in
             default = false;
         };
 
-        wm = mkOption {
-            description = "Which window manager to install";
-            type = types.enum [ "sway" ];
-            default = "sway";
+        sway = {
+            enable = mkOption {
+                description = "Install and configure sway window manager";
+                type = types.bool;
+                default = true;
+            };
+
+            desktop = mkOption {
+                description= "Use desktop configuration";
+                type = types.bool;
+                default = false;
+            };
+
         };
 
         terminal = mkOption {
             description = "Which terminal to install (alacritty)";
             type = types.enum [ pkgs.alacritty ];
             default = pkgs.alacritty;
+        };
+
+        gtk = mkOption {
+            description = "Whether to configure gtk";
+            type = types.bool;
+            default = cfg.gui.enable;
         };
 
         protonmail = mkOption {
@@ -46,13 +61,20 @@ in
             type = types.bool;
             default = false;
         };
+
+        monitors = mkOption {
+            description = "Attribute set of system monitors";
+            type = types.attrs;
+            default = {};
+        };
+            
     };
 
 
     config = mkIf cfg.enable {
 
         environment.systemPackages = with pkgs; with localPackages.x86_64-linux; []
-        ++ optionals (cfg.wm == "sway") [
+        ++ optionals cfg.sway.enable [
             wl-clipboard
             grim
             slurp
@@ -68,8 +90,6 @@ in
         ++ optional cfg.matrix cinny-desktop
         ++ optional cfg.secrets libsecret
         ++ optionals cfg.protonmail [ thunderbird protonmail-bridge ];
-
-        programs.sway.enable = mkIf (cfg.wm == "sway") true;
 
         programs.dconf.enable = mkIf cfg.secrets true;
         services.gnome.gnome-keyring.enable = mkIf cfg.secrets true;

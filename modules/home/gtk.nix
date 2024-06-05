@@ -1,24 +1,16 @@
 { lib
 , pkgs
 , config
+, systemConfig
 , ...
 }:
 
 with lib; let
-    cfg = config.simmer.gtk;
-    gui = config.simmer.gui;
+    gui = systemConfig.gui;
 in
 {
-    options.simmer.gtk = {
-        theme.enable = mkOption {
-            description = "Whether to enable gtk themes";
-            type = types.bool;
-            default = gui.enable;
-        };
-    };
-
     config = {
-        gtk = mkIf cfg.enable {
+        gtk = mkIf gui.enable {
             enable = true;
             cursorTheme = {
                 name = "phinger-cursors-dark";

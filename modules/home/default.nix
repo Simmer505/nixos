@@ -10,5 +10,7 @@
         ./direnv.nix
         ./git.nix
         ./qt.nix
+        ./sway.nix
+        ./gtk.nix
     ];
 }
