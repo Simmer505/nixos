@@ -93,10 +93,16 @@
 
             };
 
+
             gui = {
                 enable = true;
                 protonmail = true;
                 matrix = true;
+
+                sway = {
+                    enable = true;
+                    desktop = false;
+                };
 
                 monitors = utils.mkMonitor {
                     monitor = "eDP-1";
