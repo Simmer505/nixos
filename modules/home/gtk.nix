@@ -17,7 +17,7 @@ in
                 package = pkgs.phinger-cursors;
             };
             iconTheme = {
-                name = "awaida-dark";
+                name = "awaidta-dark";
                 package = pkgs.gnome.adwaita-icon-theme;
             };
             theme = {

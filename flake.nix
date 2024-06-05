@@ -45,6 +45,7 @@
                 enable = true;
                 protonmail = true;
                 matrix = true;
+                gtk = false;
 
                 sway = {
                     enable = true;

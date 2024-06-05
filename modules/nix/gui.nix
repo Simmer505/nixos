@@ -95,11 +95,24 @@ in
         services.gnome.gnome-keyring.enable = mkIf cfg.secrets true;
         services.dbus.packages = mkIf cfg.secrets [ pkgs.gnome.seahorse ];
 
-        xdg.portal.wlr.enable = true;
+        xdg.portal.config.common = [ "wlr" "gtk" ];
         programs.thunar.enable = true;
 
-        fonts.packages = with pkgs; [
-            font-awesome
-        ];
+        fonts = {
+            packages = with pkgs; [
+                liberation_ttf
+                ubuntu_font_family
+                font-awesome
+                vazir-fonts
+            ];
+             fontconfig = {
+
+                defaultFonts = {
+                    serif = [  "Liberation Serif" "Vazirmatn" ];
+                    sansSerif = [ "Ubuntu" "Vazirmatn" ];
+                    monospace = [ "Ubuntu Mono" ];
+                };
+            };
+        };
     };
 }
