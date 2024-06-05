@@ -85,6 +85,7 @@ in
             wayland-pipewire-idle-inhibit
             firefox
             mpv
+            feh
         ]
         ++ [ cfg.terminal ]
         ++ optional cfg.matrix cinny-desktop

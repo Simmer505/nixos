@@ -85,18 +85,19 @@
                 pipewire.enable = true;
                 music.enable = true;
 
-                gui = {
-                    enable = true;
-                    protonmail = true;
-                    matrix = true;
+            };
 
-                    monitors = utils.mkMonitor {
-                        monitor = "eDP-1";
-                        resolution = "1920x1200";
-                        refreshRate = 60;
-                    };
+            gui = {
+                enable = true;
+                protonmail = true;
+                matrix = true;
 
+                monitors = utils.mkMonitor {
+                    monitor = "eDP-1";
+                    resolution = "1920x1200";
+                    refreshRate = 60;
                 };
+
             };
 
             common.nil.enable = true;
