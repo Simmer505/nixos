@@ -21,8 +21,7 @@ in
             allowedTCPPorts = mkOption {
                 description = "Which tcp ports to allow through firewall";
                 type = types.listOf types.int;
-                default = []
-                    ++ optional openssh.enable openssh.port;
+                default = [];
             };
 
             allowedUDPPorts = mkOption {
@@ -66,7 +65,9 @@ in
         networking.nameservers = cfg.nameservers;
         networking.firewall = {
             enable = cfg.firewall.enable;
-            allowedTCPPorts = cfg.firewall.allowedTCPPorts;
+            allowedTCPPorts = cfg.firewall.allowedTCPPorts
+                ++ optional openssh.enable openssh.port;
+
             allowedUDPPorts = cfg.firewall.allowedUDPPorts;
         };
     };

@@ -3,15 +3,21 @@
 
     inputs = {
         currentSystem.url = "path:/etc/nixos/hostname";
+
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+        flake-utils.url = "github:numtide/flake-utils";
     };
 
-    outputs = inputs@{ self, currentSystem, nixpkgs, home-manager, ... }: let
+    outputs = inputs@{ self, currentSystem, nixpkgs, home-manager, flake-utils, ... }: let
         inherit (self) outputs;
+        inherit (currentSystem) hostname;
 
-        hostname = currentSystem.hostname;
+        overlays = import ./overlays;
+        utils = import ./utils;
 
         configs."ankaa" = {
             system = "x86_64-linux";
@@ -79,7 +85,10 @@
 
             common.nil.enable = true;
 
-            networking.wireguard.enable = true;
+            networking = {
+                wireguard.enable = true;
+                nameservers = [ "192.168.0.100" ];
+            };
 
 
         };
@@ -90,9 +99,7 @@
             audio = {
                 pipewire.enable = true;
                 music.enable = true;
-
             };
-
 
             gui = {
                 enable = true;
@@ -114,22 +121,28 @@
 
             common.nil.enable = true;
 
-            networking.wireguard.enable = true;
+            networking = {
+                wireguard.enable = true;
+                nameservers = [ "192.168.0.100" ];
+            };
         };
 
-        configs."default-hostname" = {
 
-        };
+        configs."default-hostname" = {};
 
-        utils = import ./utils;
         system = configs."${hostname}".system;
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+            inherit system;
+            overlays = with overlays; [ gamescope ];
+            config.allowUnfree = true;
+        };
 
         in {
             nixosConfigurations = {
                 "${hostname}" = nixpkgs.lib.nixosSystem {
                     specialArgs = {
                         inherit (outputs) localPackages;
+                        inherit pkgs;
                     };
                     modules = [
                         {
@@ -153,7 +166,7 @@
                     ];
                 };
             };
-            localPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system:
+            localPackages = pkgs.lib.genAttrs flake-utils.lib.defaultSystems (system:
                 {
                     kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix {};
                     gamescope-old = pkgs.callPackage ./pkgs/gamescope-old {};

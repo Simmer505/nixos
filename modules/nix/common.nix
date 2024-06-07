@@ -28,6 +28,12 @@ in
             type = types.enum [ "fish" ];
             default = "fish";
         };
+
+        caps = mkOption {
+            description = "What key to bind caps lock to";
+            type = types.enum [ "ctrl-esc" "esc" "caps" ];
+            default = "ctrl-esc";
+        };
     };
 
 
@@ -42,6 +48,7 @@ in
             eza
             ripgrep
             fzf
+            yazi
             ncdu
             btop
         ]
@@ -50,6 +57,19 @@ in
         programs.neovim = mkIf cfg.neovim.enable {
             enable = true;
             defaultEditor = true;
+        };
+
+        services.keyd = mkIf (cfg.caps != "caps") {
+            enable = true;
+            keyboards.default = {
+                ids = [ "*" ];
+                settings = {
+                    main = mkMerge [
+                        (mkIf (cfg.caps == "ctrl-esc") { capslock = "overload(control, esc)"; })
+                        (mkIf (cfg.caps == "esc") { capslock = "esc"; })
+                    ];
+                };
+            };
         };
 
         programs.fish.enable = mkIf (cfg.shell == "fish") true;

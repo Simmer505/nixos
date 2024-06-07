@@ -12,6 +12,17 @@ with lib; let
 in
 {
     config = mkIf gui.sway.enable {
+        services.swayidle = {
+            enable = true;
+            timeouts = [
+                { 
+                    timeout = 600;
+                    command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
+                    resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+                }
+            ];
+                
+        };
         wayland.windowManager.sway = {
             enable = true;
             checkConfig = false;
@@ -26,6 +37,7 @@ in
                     "XF86AudioPause" = "exec playerctl play-pause";
                     "XF86AudioNext" = "exec playerctl next";
                     "XF86AudioPrev" = "exec playerctl previous";
+                    "${modifier}+space" = "exec \"kickoff-dot-desktop | ${pkgs.kickoff}/bin/kickoff --from-stdin --stdout | xargs -d '\\n' ${pkgs.sway}/bin/swaymsg exec\"";
                     "${modifier}+Return" = "exec alacritty ";
                     "${modifier}+Control+f" = "exec MOZ_ENABLE_WAYLAND=1 firefox";
                     "${modifier}+Control+s" = "exec steam";
@@ -54,11 +66,12 @@ in
                     "${modifier}+Shift+Right" = "move right";
                     "${modifier}+b" = "split h";
                     "${modifier}+v" = "split v";
+                    "${modifier}+r" = "mode 'resize'";
                     "${modifier}+f" = "fullscreen toggle";
+                    "${modifier}+Shift+space" = "floating toggle";
                     "${modifier}+s" = "layout stacking";
                     "${modifier}+w" = "layout tabbed";
                     "${modifier}+e" = "layout toggle split";
-                    "${modifier}+Shift+space" = "floating toggle";
                     "${modifier}+a" = "focus parent";
                     "${modifier}+1" = "workspace 1 ";
                     "${modifier}+2" = "workspace 2";
@@ -82,12 +95,9 @@ in
                     "${modifier}+Shift+0" = "move container to workspace 10";
                     "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
                     "${modifier}+Shift+c" = "reload";
-                    "${modifier}+r" = "mode 'resize'";
                 };
 
-                startup = [
-                    { command = "--no-startup-id swayidle -w timeout 600 'swaymsg \"output * dpms off\"' resume 'swaymsg \"output * dpms on\"'"; }
-                ] 
+                startup = [] 
                 ++ optionals gui.sway.desktop [
                     { command = "vorta"; }
                     { command = "MOZ_ENABLE_WAYLAND=1 firefox"; }
@@ -154,7 +164,7 @@ in
 
                 input."type:keyboard" = {
                     xkb_layout = "us,de";
-                    xkb_options = "caps:escape,grp:shifts_toggle";
+                    xkb_options = "grp:shifts_toggle";
                 };
                 
                 output = gui.monitors;
@@ -184,14 +194,14 @@ in
                 };
 
                 bars = [
-                    { command = "\${pkgs.waybar}/bin/waybar"; }
+                    { command = "${pkgs.waybar}/bin/waybar"; }
                 ];
+
             };
 
 
             extraConfig = ''
 
-            bindsym ${modifier}+space exec kickoff-dot-desktop | kickoff --from-stdin --stdout | xargs -d '\n' swaymsg exec
 
             set $bg-color            #58536d
             set $inactive-bg-color   #2f343f
@@ -207,6 +217,7 @@ in
             client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #4B5177
 
             smart_gaps inverse_outer
+
             '';
         };
     };

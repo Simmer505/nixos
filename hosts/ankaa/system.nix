@@ -10,18 +10,15 @@
     ...
 }: {
 
-    nixpkgs = {
-        overlays = [];
-        config = {
-            allowUnfree = true;
-        };
-    };
-
     nix = {
         settings = {
             experimental-features = "nix-command flakes";
         };
     };
+
+    hardware.opengl.extraPackages = with pkgs; [
+        rocmPackages.clr.icd
+    ];
 
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
