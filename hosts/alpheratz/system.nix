@@ -36,24 +36,24 @@
         "/nix".options = [ "compress=zstd" "noatime" ];
     };
 
-    networking.wg-quick.interfaces = {
-        wg0 = {
-            address = [ "10.6.0.5" ];
-            listenPort = 51820;
-            privateKeyFile = "/root/wireguard-keys/wg0/private";
-            dns = [ "10.2.0.100" ];
+    # networking.wg-quick.interfaces = {
+    #     wg0 = {
+    #         address = [ "10.6.0.5" ];
+    #         listenPort = 51820;
+    #         privateKeyFile = "/root/wireguard-keys/wg0/private";
+    #         dns = [ "10.2.0.100" ];
 
-            peers = [
-                {
-                    publicKey = "pEWHugUnnhWXkJzCIhXryRRZMoCAuvAITDeP4ItenQk=";
-                    presharedKeyFile = "/root/wireguard-keys/wg0/preshared";
-                    allowedIPs = [ "10.2.0.0/24" "192.168.0.0/24" ];
-                    endpoint = "simmer505.com:51820";
-                    persistentKeepalive = 25;
-                }
-            ];
-        };
-    };
+    #         peers = [
+    #             {
+    #                 publicKey = "pEWHugUnnhWXkJzCIhXryRRZMoCAuvAITDeP4ItenQk=";
+    #                 presharedKeyFile = "/root/wireguard-keys/wg0/preshared";
+    #                 allowedIPs = [ "10.2.0.0/24" "192.168.0.0/24" ];
+    #                 endpoint = "simmer505.com:51820";
+    #                 persistentKeepalive = 25;
+    #             }
+    #         ];
+    #     };
+    # };
 
     # Set your time zone.
     time.timeZone = "America/Chicago";
