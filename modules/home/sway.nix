@@ -170,6 +170,7 @@ in
                     commands = [
                         { criteria = { class = "vesktop"; }; command = "opacity 0.9"; }
                         { criteria = { app_id = "Alacritty"; }; command = "opacity 0.9"; }
+                        { criteria = { class = "feishin"; }; command = "opacity 0.9"; }
                         { criteria = { class = "gamescope"; }; command = "fullscreen"; }
                         { criteria = { app_id = "gamescope"; }; command = "fullscreen"; }
                         { criteria = { app_id = "mpv"; }; command = "fullscreen"; }
@@ -206,11 +207,6 @@ in
             client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #4B5177
 
             smart_gaps inverse_outer
-
-            bar {
-                swaybar_command waybar
-            }
-
             '';
         };
     };
