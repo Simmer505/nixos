@@ -103,8 +103,8 @@ in
             packages = with pkgs; [
                 liberation_ttf
                 ubuntu_font_family
-                font-awesome
                 vazir-fonts
+                font-awesome
             ];
              fontconfig = {
 

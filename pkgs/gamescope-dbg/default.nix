@@ -50,9 +50,9 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "ValveSoftware";
     repo = "gamescope";
-    rev = "0065946d1bf69584714a17698947ab80a97128bc";
+    rev = "420eb91387a484fd7b1ea71449091f0480d9e538";
     fetchSubmodules = true;
-    hash = "sha256-PiDXHq7/CxIOday5DQyAG6i3+ggm6zp3iSPIhq63EOk=";
+    hash = "sha256-XcefR0wiDHQY7wMX+LQTEntffi2RdMW8m2HNQMz035A=";
   };
 
   patches = [
@@ -144,11 +144,11 @@ stdenv.mkDerivation (finalAttrs: {
       --add-needed ${libgcc.lib}/lib/libasan.so.8 \
       --add-needed libvulkan.so.1
 
-    LD_PRELOAD="${libgcc.lib}/lib/libasan.so.8"
-
     # --debug-layers flag expects these in the path
     wrapProgram "$out/bin/gamescope" \
-      --prefix PATH : ${with xorg; lib.makeBinPath [xprop xwininfo]}
+      --prefix PATH : ${with xorg; lib.makeBinPath [xprop xwininfo]} \
+      --set ASAN_OPTIONS "halt_on_error=false" \
+      --set LD_PRELOAD "${libgcc.lib}/lib/libasan.so.8"
 
     # Install ReShade shaders
     mkdir -p $out/share/gamescope/reshade

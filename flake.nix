@@ -2,13 +2,16 @@
     description = "NixOS configuration";
 
     inputs = {
+        currentSystem.url = "path:/etc/nixos/hostname";
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = inputs@{ self, nixpkgs, home-manager, ... }: let
+    outputs = inputs@{ self, currentSystem, nixpkgs, home-manager, ... }: let
         inherit (self) outputs;
+
+        hostname = currentSystem.hostname;
 
         configs."ankaa" = {
             system = "x86_64-linux";
@@ -40,7 +43,7 @@
                     easyeffects = true;
                 };
             };
-            
+
             gui = {
                 enable = true;
                 protonmail = true;
@@ -69,7 +72,10 @@
 
             };
 
-            games.enable = true;
+            games = {
+                enable = true;
+                lutris.enable = true;
+            };
 
             common.nil.enable = true;
 
@@ -109,54 +115,44 @@
 
         };
 
-        hostname = 
-            if (builtins.pathExists ./hostname) then
-                builtins.readFile(./hostname)
-            else
-                "default-hostname";
-
         utils = import ./utils;
         system = configs."${hostname}".system;
         pkgs = nixpkgs.legacyPackages.${system};
 
-
-
         in {
-        nixosConfigurations = {
-            "${hostname}" = nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                    inherit (outputs) localPackages;
-                };
-                modules = [
-                    {
-                        networking.hostName = hostname;
-                    }
-                    (import ./modules/nix)
-                    {
-                        simmer = configs."${hostname}";
-                    }
-                    (./. + "/hosts/${hostname}/system.nix")
-                    (./. + "/hosts/${hostname}/hardware-configuration.nix")
-                    home-manager.nixosModules.home-manager
-                    {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;
-                        home-manager.extraSpecialArgs = { 
-                            systemConfig = configs."${hostname}";
-                            inherit utils;
-                        };
+            nixosConfigurations = {
+                "${hostname}" = nixpkgs.lib.nixosSystem {
+                    specialArgs = {
+                        inherit (outputs) localPackages;
+                    };
+                    modules = [
+                        {
+                            networking.hostName = hostname;
+                            simmer = configs."${hostname}";
+                        }
+                        (import ./modules/nix)
+                        (./. + "/hosts/${hostname}/system.nix")
+                        (./. + "/hosts/${hostname}/hardware-configuration.nix")
+                        home-manager.nixosModules.home-manager
+                        {
+                            home-manager.useGlobalPkgs = true;
+                            home-manager.useUserPackages = true;
+                            home-manager.extraSpecialArgs = { 
+                                inherit utils;
+                                systemConfig = configs."${hostname}";
+                            };
 
-                        home-manager.users.eesim = import (./. + "/hosts/${hostname}/home.nix");
-                    }
-                ];
+                            home-manager.users.eesim = import (./. + "/hosts/${hostname}/home.nix");
+                        }
+                    ];
+                };
             };
+            localPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system:
+                {
+                    kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix {};
+                    gamescope-old = pkgs.callPackage ./pkgs/gamescope-old {};
+                    gamescope-dbg = pkgs.callPackage ./pkgs/gamescope-dbg {};
+                }
+            );
         };
-        localPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system:
-            {
-                kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix { };
-                gamescope-old = pkgs.callPackage ./pkgs/gamescope-old {};
-                gamescope-dbg = pkgs.callPackage ./pkgs/gamescope-dbg {};
-            }
-        );
-    };
 }

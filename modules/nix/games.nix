@@ -47,12 +47,11 @@ in
     };
 
     config = mkIf cfg.enable {
-        environment.systemPackages = with pkgs; with localPackages.x86_64-linux;
-        []
-        ++ optional cfg.protonup.enable protonup-qt
-        ++ optional cfg.gamescope.enable gamescope-old
-        ++ optional cfg.discord.enable vesktop
-        ++ optionals cfg.lutris.enable [ lutris wine ];
+        environment.systemPackages = with pkgs; with localPackages.x86_64-linux; []
+            ++ optional cfg.protonup.enable protonup-qt
+            ++ optional cfg.gamescope.enable gamescope-old
+            ++ optional cfg.discord.enable vesktop
+            ++ optionals cfg.lutris.enable [ lutris wine ];
 
         programs.steam = mkIf cfg.steam.enable {
             enable = true;

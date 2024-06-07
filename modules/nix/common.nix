@@ -20,7 +20,7 @@ in
         nil.enable = mkOption {
             description = "Whether to install nil";
             type = types.bool;
-            default = false;
+            default = true;
         };
 
         shell = mkOption {

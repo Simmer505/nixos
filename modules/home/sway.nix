@@ -7,20 +7,11 @@
 }:
 
 with lib; let
-    cfg = config.simmer.sway;
     gui = systemConfig.gui;
     modifier = "Mod4";
 in
 {
-    options.simmer.sway = {
-        enable = mkOption {
-            description = "Whether to install and set sway as window manager";
-            type = types.bool;
-            default = gui.enable;
-        };
-    };
-
-    config = mkIf cfg.enable {
+    config = mkIf gui.sway.enable {
         wayland.windowManager.sway = {
             enable = true;
             checkConfig = false;
@@ -144,11 +135,10 @@ in
                     ];
 
                     "6" = [
-                        {app_id="com.obsproject.Studio"; }
                     ];
 
                     "7" = [
-                        {app_id="org.strawberrymusicplayer.strawberry"; }
+                        {class="feishin"; }
                     ];
 
                     "8" = [
@@ -159,10 +149,7 @@ in
 
                     "9" = [];
 
-                    "0" = [
-                        {app_id="python3"; }
-                        {class="steam_proton"; }
-                    ];
+                    "0" = [];
                 };
 
                 input."type:keyboard" = {

@@ -38,7 +38,7 @@ in
         };
 
         passphrase = mkOption {
-            description = "path to file containing passphrase";
+            description = "Path to file containing passphrase";
             type = types.path;
         };
 
