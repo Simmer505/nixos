@@ -6,12 +6,7 @@ local plugins = {
 
     'kylechui/nvim-surround',
 
-    {
     'ibhagwan/fzf-lua',
-    config = function()
-        require('fzf-lua').setup({'skim'})
-    end
-    },
 
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
@@ -21,9 +16,9 @@ local plugins = {
     'rust-lang/rust.vim',
 
     {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    opts={},
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        opts={},
     },
 
     {

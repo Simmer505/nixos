@@ -15,7 +15,7 @@
         homeDirectory = "/home/eesim";
     };
 
-    home.file.".config/nvim".source = ./dotfiles/nvim;
+    home.file.".config/nvim".source = ../shared/dotfiles/nvim;
     home.file.".config/waybar".source = ./dotfiles/waybar;
     home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
     home.file.".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
