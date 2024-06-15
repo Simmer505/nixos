@@ -65,7 +65,6 @@
     users.users.eesim = {
         isNormalUser = true;
         extraGroups = [ "wheel" "video" "audo" "networkmanager" ];
-        packages = with pkgs; [];
         shell = pkgs.fish;
     };
 

@@ -58,6 +58,7 @@ in
     config = {
         environment.systemPackages = with pkgs; [
             ldns
+            mtr
         ]
         ++ optional cfg.wireguard.enable wireguard-tools;
 

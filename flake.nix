@@ -4,15 +4,28 @@
     inputs = {
         currentSystem.url = "path:/etc/nixos/hostname";
 
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-        home-manager.url = "github:nix-community/home-manager";
-        home-manager.inputs.nixpkgs.follows = "nixpkgs";
+        nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+        home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
+        home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
+
+        home-manager-unstable.url = "github:nix-community/home-manager";
+        home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
         flake-utils.url = "github:numtide/flake-utils";
     };
 
-    outputs = inputs@{ self, currentSystem, nixpkgs, home-manager, flake-utils, ... }: let
+    outputs = inputs@{ self
+                     , currentSystem
+                     , nixpkgs-stable
+                     , nixpkgs-unstable
+                     , home-manager-stable
+                     , home-manager-unstable
+                     , flake-utils
+                     , ...
+                     }: let
         inherit (self) outputs;
         inherit (currentSystem) hostname;
 
@@ -21,6 +34,7 @@
 
         configs."ankaa" = {
             system = "x86_64-linux";
+            common.nixpkgs = "unstable";
             
             openssh = {
                 enable = true;
@@ -95,6 +109,7 @@
 
         configs."alpheratz" = {
             system = "x86_64-linux";
+            common.nixpkgs = "unstable";
             
             audio = {
                 pipewire.enable = true;
@@ -127,15 +142,35 @@
             };
         };
 
+        currentConfig = configs."${hostname}";
+        system = currentConfig.system;
 
-        configs."default-hostname" = {};
+        nixpkgs = if currentConfig.common.nixpkgs == "unstable" then
+            nixpkgs-unstable
+        else
+            nixpkgs-stable;
 
-        system = configs."${hostname}".system;
+        home-manager = if currentConfig.common.nixpkgs == "unstable" then
+            home-manager-unstable
+        else
+            home-manager-stable;
+
         pkgs = import nixpkgs {
-            inherit system;
-            overlays = with overlays; [ gamescope ];
-            config.allowUnfree = true;
-        };
+                inherit system;
+                overlays = with overlays; [ gamescope ];
+                config.allowUnfree = true;
+            };
+
+
+        systemConfig = if builtins.pathExists (./. + "/hosts/${hostname}/system.nix") then
+            (./. + "/hosts/${hostname}/system.nix")
+        else
+            ./hosts/default/system.nix;
+
+        homeConfig = if builtins.pathExists (./. + "/hosts/${hostname}/home.nix") then
+            (./. + "/hosts/${hostname}/home.nix")
+        else 
+            ./hosts/default/home.nix;
 
         in {
             nixosConfigurations = {
@@ -147,10 +182,10 @@
                     modules = [
                         {
                             networking.hostName = hostname;
-                            simmer = configs."${hostname}";
+                            simmer = currentConfig;
                         }
                         (import ./modules/nix)
-                        (./. + "/hosts/${hostname}/system.nix")
+                        systemConfig
                         (./. + "/hosts/${hostname}/hardware-configuration.nix")
                         home-manager.nixosModules.home-manager
                         {
@@ -161,7 +196,7 @@
                                 systemConfig = configs."${hostname}";
                             };
 
-                            home-manager.users.eesim = import (./. + "/hosts/${hostname}/home.nix");
+                            home-manager.users.eesim = import homeConfig;
                         }
                     ];
                 };

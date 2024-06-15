@@ -34,6 +34,11 @@ in
             type = types.enum [ "ctrl-esc" "esc" "caps" ];
             default = "ctrl-esc";
         };
+
+        nixpkgs = mkOption {
+            description = "Which nixpkgs version to use";
+            type = types.any;
+        };
     };
 
 
