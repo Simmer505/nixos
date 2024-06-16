@@ -142,6 +142,17 @@
             };
         };
 
+        configs.diphda = {
+            system = "x86_64-linux";
+            common.nixpkgs = "stable";
+
+            gui = {
+                enable = false;
+                sway.enable = false;
+            };
+
+        };
+
         currentConfig = configs."${hostname}";
         system = currentConfig.system;
 

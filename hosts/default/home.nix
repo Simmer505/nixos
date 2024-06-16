@@ -11,7 +11,7 @@
 
     home = {
         username = "eesim";
-        homeDirectory = "/home/eesim";
+        # homeDirectory = "/home/eesim";
     };
 
     home.file.".config/nvim".source = ../shared/dotfiles/nvim;
