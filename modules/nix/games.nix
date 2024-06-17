@@ -33,6 +33,12 @@ in
             default = true;
         };
 
+        minecraft.enable = mkOption {
+            description = "Whether to install minecraft launcher";
+            type = types.bool;
+            default = false;
+        };
+
         gamescope.enable = mkOption {
             description = "Whether to install gamescope";
             type = types.bool;
@@ -51,6 +57,7 @@ in
             ++ optional cfg.protonup.enable protonup-qt
             ++ optional cfg.gamescope.enable gamescope
             ++ optional cfg.discord.enable vesktop
+            ++ optional cfg.minecraft.enable prismlauncher
             ++ optionals cfg.lutris.enable [ lutris wine ];
 
         programs.steam = mkIf cfg.steam.enable {

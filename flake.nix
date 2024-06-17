@@ -96,6 +96,7 @@
             games = {
                 enable = true;
                 lutris.enable = true;
+                minecraft.enable = true;
             };
 
             common.nil.enable = true;
