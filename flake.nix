@@ -15,6 +15,7 @@
         home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
         flake-utils.url = "github:numtide/flake-utils";
+
     };
 
     outputs = inputs@{ self
@@ -29,7 +30,7 @@
         inherit (self) outputs;
         inherit (currentSystem) hostname;
 
-        overlays = import ./overlays;
+        overlays = import ./overlays { inherit inputs; };
         utils = import ./utils;
 
         configs."ankaa" = {
@@ -146,11 +147,18 @@
             system = "x86_64-linux";
             common.nixpkgs = "stable";
 
+            openssh.enable = true;
+
             gui = {
                 enable = false;
                 sway.enable = false;
             };
 
+            networking = {
+                firewall = {
+                    allowedTCPPorts = [ 80 443 25565 24454 8089 ];
+                };
+            };
         };
 
         currentConfig = configs."${hostname}";

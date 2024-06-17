@@ -14,25 +14,25 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0dfd896f-a313-4a43-a171-3d1157a01c02";
+    { device = "/dev/disk/by-uuid/a60ac6e2-b56e-49f8-bfcc-64b099dc6569";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/0dfd896f-a313-4a43-a171-3d1157a01c02";
+    { device = "/dev/disk/by-uuid/a60ac6e2-b56e-49f8-bfcc-64b099dc6569";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/0dfd896f-a313-4a43-a171-3d1157a01c02";
+    { device = "/dev/disk/by-uuid/a60ac6e2-b56e-49f8-bfcc-64b099dc6569";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1925-D969";
+    { device = "/dev/disk/by-uuid/2E79-9765";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
