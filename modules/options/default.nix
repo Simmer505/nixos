@@ -6,12 +6,13 @@
 
 {
     imports = [
-        ./openssh.nix
-        ./backup.nix
         ./audio.nix
-        ./gui.nix
+        ./backup.nix
         ./common.nix
-        ./networking.nix
         ./games.nix
+        ./gui.nix
+        ./networking.nix
+        ./openssh.nix
+        ./system.nix
     ];
 }

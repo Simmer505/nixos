@@ -7,7 +7,7 @@
 }:
 
 with lib; let
-    gui = systemConfig.gui;
+    gui = config.simmer.gui;
     modifier = "Mod4";
 in
 {

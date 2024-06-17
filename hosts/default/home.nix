@@ -1,13 +1,17 @@
 {
     config,
     pkgs,
+    systemConfig,
     ...
 }:
 {
 
     imports = [
     ../../modules/home
+    ../../modules/options
     ];
+
+    simmer = systemConfig;
 
     home = {
         username = "eesim";

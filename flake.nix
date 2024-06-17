@@ -205,6 +205,7 @@
                             simmer = currentConfig;
                         }
                         (import ./modules/nix)
+                        (import ./modules/options)
                         systemConfig
                         (./. + "/hosts/${hostname}/hardware-configuration.nix")
                         home-manager.nixosModules.home-manager
