@@ -16,6 +16,8 @@
 
         flake-utils.url = "github:numtide/flake-utils";
 
+        sops-nix.url = "github:Mic92/sops-nix";
+
     };
 
     outputs = inputs@{ self
@@ -25,6 +27,7 @@
                      , home-manager-stable
                      , home-manager-unstable
                      , flake-utils
+                     , sops-nix
                      , ...
                      }: let
         inherit (self) outputs;
@@ -204,10 +207,11 @@
                             networking.hostName = hostname;
                             simmer = currentConfig;
                         }
-                        (import ./modules/nix)
-                        (import ./modules/options)
                         systemConfig
                         (./. + "/hosts/${hostname}/hardware-configuration.nix")
+                        sops-nix.nixosModules.sops
+                        (import ./modules/nix)
+                        (import ./modules/options)
                         home-manager.nixosModules.home-manager
                         {
                             home-manager.useGlobalPkgs = true;
