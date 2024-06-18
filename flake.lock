@@ -2,8 +2,8 @@
   "nodes": {
     "currentSystem": {
       "locked": {
-        "lastModified": 1717721450,
-        "narHash": "sha256-V2OISNdFOCaFrUjA6fLVe3HsZC9nn7vMjGfhKSHTRIk=",
+        "lastModified": 1718580560,
+        "narHash": "sha256-M69Hx8goDX65ZC/F7ENITsGr3XYBCSsa4B+vDOnOGXs=",
         "path": "/etc/nixos/hostname",
         "type": "path"
       },

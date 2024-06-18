@@ -6,7 +6,7 @@
 }:
 
 with lib; let
-    gui = systemConfig.gui;
+    gui = config.simmer.gui;
 in
 {
     config = {
