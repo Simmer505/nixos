@@ -39,6 +39,9 @@ in
         fonts = {
             packages = with pkgs; [
                 liberation_ttf
+                noto-fonts
+                noto-fonts-cjk
+                noto-fonts-extra
                 ubuntu_font_family
                 vazir-fonts
                 font-awesome
@@ -46,9 +49,9 @@ in
              fontconfig = {
 
                 defaultFonts = {
-                    serif = [  "Liberation Serif" "Vazirmatn" ];
-                    sansSerif = [ "Ubuntu" "Vazirmatn" ];
-                    monospace = [ "Ubuntu Mono" ];
+                    serif = [  "Noto Serif" "Noto Serif CJK JP" ];
+                    sansSerif = [ "Noto Sans" "Noto Sans CJK JP" ];
+                    monospace = [ "Ubuntu Mono" "Noto Sans Mono CJK JP" ];
                 };
             };
         };
