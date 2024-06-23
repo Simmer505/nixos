@@ -37,6 +37,11 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
+  fileSystems."/media" = 
+  { device = "192.168.1.100:/volume1/Media";
+    fsType = "nfs";
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

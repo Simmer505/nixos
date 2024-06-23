@@ -49,7 +49,7 @@ in
              fontconfig = {
 
                 defaultFonts = {
-                    serif = [  "Noto Serif" "Noto Serif CJK JP" ];
+                    serif = [ "Noto Serif" "Noto Serif CJK JP" ];
                     sansSerif = [ "Noto Sans" "Noto Sans CJK JP" ];
                     monospace = [ "Ubuntu Mono" "Noto Sans Mono CJK JP" ];
                 };

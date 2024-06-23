@@ -147,7 +147,7 @@
             };
         };
 
-        configs.diphda = {
+        configs."diphda" = {
             system = "x86_64-linux";
             common.nixpkgs = "stable";
 
@@ -155,7 +155,7 @@
 
             networking = {
                 firewall = {
-                    allowedTCPPorts = [ 80 443 25565 24454 8089 ];
+                    allowedTCPPorts = [ 80 443 4533 7878 8096 8089 8902 8989 9000 9696 11112 24454 25565 25600 ];
                 };
             };
         };

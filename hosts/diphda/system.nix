@@ -16,6 +16,60 @@
         };
     };
 
+    sops = {
+        defaultSopsFile = ../../secrets/diphda/secrets.yaml;
+        age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+        secrets."mc-arcadia/repo_password" = {};
+    };
+
+    systemd.timers."mc-arcadia-backup" = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+            OnCalendar = "*-*-* *:00:00";
+            Persistent = true;
+        };
+    };
+
+    systemd.services."mc-arcadia-backup" = {
+        enable = true;
+        preStart = ''
+            ${pkgs.docker}/bin/docker exec mc-arcadia-mc-1 mc-send-to-console say Server backup starting in 5 minutes
+            sleep 5m
+        '';
+        postStart = ''
+            ${pkgs.docker}/bin/docker exec mc-arcadia-mc-1 mc-send-to-console say Server backup starting
+        '';
+        serviceConfig = {
+            Type = "oneshot"; 
+            User = "root";
+            ExecStart = ''
+                systemd-inhibit --who="borgmatic" \
+                --why="Prevent interrupting scheduled backup" \
+                ${pkgs.borgmatic}/bin/borgmatic -c /etc/nixos/hosts/diphda/mc-arcadia-backup.yaml --verbosity 1 --syslog-verbosity 1
+                '';
+        };
+    };
+
+    systemd.services."dl-manager" = {
+        enable = true;
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+        path = [ pkgs.bash pkgs.lftp ];
+        serviceConfig = {
+            Type = "simple";
+            User = "eesim";
+            WorkingDirectory = "/home/eesim/scripts";
+            ExecStart = ''
+                /home/eesim/scripts/dl_manager_tokio -vv \
+                    -c /home/eesim/scripts/certs/fullchain.cer \
+                    -k /home/eesim/scripts/certs/download.simmer505.com.key \
+                    --script-dir /home/eesim/scripts/ \
+                    0.0.0.0:11112
+            '';
+        };
+    };
+
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
