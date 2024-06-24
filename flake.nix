@@ -106,7 +106,6 @@
 
             networking = {
                 wireguard.enable = true;
-                nameservers = [ "192.168.0.100" ];
             };
 
 
@@ -143,7 +142,6 @@
 
             networking = {
                 wireguard.enable = true;
-                nameservers = [ "192.168.0.100" ];
             };
         };
 

@@ -1,11 +1,16 @@
 keys:
   - &admin_ankaa age1079fszreaakwf6xnwu9kra8xcsp4e8q8ed3y99yrhjnz9n3t9pnsj05m97
+  - &admin_alpheratz age1gdtjn3jgvvvspa86q3lnklflnvyf3s75y2rw23l7nk7hwcsfpg7qkq7msr
   - &server_diphda age1rxqyz6watg05r3rzlme7grpgfgezhlt535gdl7psqys2ec8eegmqchfk4d
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *admin_ankaa
+  - path_regex: secrets/alpheratz/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *admin_alpheratz
   - path_regex: secrets/diphda/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:

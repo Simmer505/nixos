@@ -22,6 +22,14 @@
         };
     };
 
+    sops = {
+        defaultSopsFile = ../../secrets/alpheratz/secrets.yaml;
+        age.keyFile = "/home/eesim/.config/sops/age/keys.txt";
+
+        secrets."wireguard/private" = {};
+        secrets."wireguard/preshared" = {};
+    };
+
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.xbootldrMountPoint = "/boot";
@@ -30,30 +38,32 @@
 
     powerManagement.powertop.enable = true;
 
+    hardware.graphics.enable = true;
+
     fileSystems = {
         "/".options = [ "compress=zstd" ];
         "/home".options = [ "compress=zstd" ];
         "/nix".options = [ "compress=zstd" "noatime" ];
     };
 
-    # networking.wg-quick.interfaces = {
-    #     wg0 = {
-    #         address = [ "10.6.0.5" ];
-    #         listenPort = 51820;
-    #         privateKeyFile = "/root/wireguard-keys/wg0/private";
-    #         dns = [ "10.2.0.100" ];
+    networking.wg-quick.interfaces = {
+        wg0 = {
+            address = [ "10.0.0.2/32" ];
+            listenPort = 51820;
+            privateKeyFile = "/run/secrets/wireguard/private";
+            dns = [ "192.168.1.1" ];
+            autostart = false;
 
-    #         peers = [
-    #             {
-    #                 publicKey = "pEWHugUnnhWXkJzCIhXryRRZMoCAuvAITDeP4ItenQk=";
-    #                 presharedKeyFile = "/root/wireguard-keys/wg0/preshared";
-    #                 allowedIPs = [ "10.2.0.0/24" "192.168.0.0/24" ];
-    #                 endpoint = "simmer505.com:51820";
-    #                 persistentKeepalive = 25;
-    #             }
-    #         ];
-    #     };
-    # };
+            peers = [
+                {
+                    publicKey = "sWdXHlBqH+tAgSl0Tqr46sfKvgFN/vMDiuN08HjzaSg=";
+                    presharedKeyFile = "/run/secrets/wireguard/preshared";
+                    allowedIPs = [ "0.0.0.0/0" "::/0" ];
+                    endpoint = "simmer505.com:51820";
+                }
+            ];
+        };
+    };
 
     # Set your time zone.
     time.timeZone = "America/Chicago";
