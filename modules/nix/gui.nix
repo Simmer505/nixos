@@ -36,6 +36,8 @@ in
         xdg.portal.config.common = [ "wlr" "gtk" ];
         programs.thunar.enable = true;
 
+        hardware.graphics.enable = true;
+
         fonts = {
             packages = with pkgs; [
                 liberation_ttf

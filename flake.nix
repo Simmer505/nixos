@@ -114,6 +114,11 @@
         configs."alpheratz" = {
             system = "x86_64-linux";
             common.nixpkgs = "unstable";
+
+            laptop = {
+                powersave.enable = true;
+                backlight.enable = true;
+            };
             
             audio = {
                 pipewire.enable = true;

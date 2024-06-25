@@ -8,6 +8,7 @@
 
 with lib; let
     gui = config.simmer.gui;
+    laptop = config.simmer.laptop;
     modifier = "Mod4";
 in
 {
@@ -29,73 +30,81 @@ in
             
             config = {
                 modifier = modifier;
-                keybindings = {
-                    "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
-                    "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
-                    "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                    "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-                    "XF86AudioPause" = "exec playerctl play-pause";
-                    "XF86AudioNext" = "exec playerctl next";
-                    "XF86AudioPrev" = "exec playerctl previous";
-                    "${modifier}+space" = "exec \"kickoff-dot-desktop | ${pkgs.kickoff}/bin/kickoff --from-stdin --stdout | xargs -d '\\n' ${pkgs.sway}/bin/swaymsg exec\"";
-                    "${modifier}+Return" = "exec alacritty ";
-                    "${modifier}+Control+f" = "exec MOZ_ENABLE_WAYLAND=1 firefox";
-                    "${modifier}+Control+s" = "exec steam";
-                    "${modifier}+Control+t" = "exec thunar";
-                    "${modifier}+Control+d" = "exec vesktop --enable-features=WebRTCPipeWireCapturer";
-                    "${modifier}+Control+x" = "exec feishin";
-                    "${modifier}+Control+h" = "exec helvum";
-                    "${modifier}+Control+p" = "exec pavucontrol";
-                    "${modifier}+Shift+s" = "exec grip -g $(slurp)";
-                    "${modifier}+Shift+q" = "kill";
-                    "${modifier}+h" = "focus left";
-                    "${modifier}+j" = "focus down";
-                    "${modifier}+k" = "focus up";
-                    "${modifier}+l" = "focus right";
-                    "${modifier}+Left" = "focus left";
-                    "${modifier}+Down" = "focus down";
-                    "${modifier}+Up" = "focus up";
-                    "${modifier}+Right" = "focus right";
-                    "${modifier}+Shift+h" = "move left";
-                    "${modifier}+Shift+j" = "move down";
-                    "${modifier}+Shift+k" = "move up";
-                    "${modifier}+Shift+l" = "move right";
-                    "${modifier}+Shift+Left" = "move left";
-                    "${modifier}+Shift+Down" = "move down";
-                    "${modifier}+Shift+Up" = "move up";
-                    "${modifier}+Shift+Right" = "move right";
-                    "${modifier}+b" = "split h";
-                    "${modifier}+v" = "split v";
-                    "${modifier}+r" = "mode 'resize'";
-                    "${modifier}+f" = "fullscreen toggle";
-                    "${modifier}+Shift+space" = "floating toggle";
-                    "${modifier}+s" = "layout stacking";
-                    "${modifier}+w" = "layout tabbed";
-                    "${modifier}+e" = "layout toggle split";
-                    "${modifier}+a" = "focus parent";
-                    "${modifier}+1" = "workspace 1 ";
-                    "${modifier}+2" = "workspace 2";
-                    "${modifier}+3" = "workspace 3";
-                    "${modifier}+4" = "workspace 4";
-                    "${modifier}+5" = "workspace 5";
-                    "${modifier}+6" = "workspace 6";
-                    "${modifier}+7" = "workspace 7";
-                    "${modifier}+8" = "workspace 8";
-                    "${modifier}+9" = "workspace 9";
-                    "${modifier}+0" = "workspace 10";
-                    "${modifier}+Shift+1" = "move container to workspace 1";
-                    "${modifier}+Shift+2" = "move container to workspace 2";
-                    "${modifier}+Shift+3" = "move container to workspace 3";
-                    "${modifier}+Shift+4" = "move container to workspace 4";
-                    "${modifier}+Shift+5" = "move container to workspace 5";
-                    "${modifier}+Shift+6" = "move container to workspace 6";
-                    "${modifier}+Shift+7" = "move container to workspace 7";
-                    "${modifier}+Shift+8" = "move container to workspace 8";
-                    "${modifier}+Shift+9" = "move container to workspace 9";
-                    "${modifier}+Shift+0" = "move container to workspace 10";
-                    "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-                    "${modifier}+Shift+c" = "reload";
-                };
+                keybindings = mkMerge [
+                    {
+                        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
+                        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
+                        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                        "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+                        "${modifier}+space" = "exec \"kickoff-dot-desktop | ${pkgs.kickoff}/bin/kickoff --from-stdin --stdout | xargs -d '\\n' ${pkgs.sway}/bin/swaymsg exec\"";
+                        "${modifier}+Return" = "exec alacritty ";
+                        "${modifier}+Control+f" = "exec MOZ_ENABLE_WAYLAND=1 firefox";
+                        "${modifier}+Control+t" = "exec thunar";
+                        "${modifier}+Control+h" = "exec helvum";
+                        "${modifier}+Control+p" = "exec pavucontrol";
+                        "${modifier}+h" = "focus left";
+                        "${modifier}+j" = "focus down";
+                        "${modifier}+k" = "focus up";
+                        "${modifier}+l" = "focus right";
+                        "${modifier}+Left" = "focus left";
+                        "${modifier}+Down" = "focus down";
+                        "${modifier}+Up" = "focus up";
+                        "${modifier}+Right" = "focus right";
+                        "${modifier}+Shift+h" = "move left";
+                        "${modifier}+Shift+j" = "move down";
+                        "${modifier}+Shift+k" = "move up";
+                        "${modifier}+Shift+l" = "move right";
+                        "${modifier}+Shift+Left" = "move left";
+                        "${modifier}+Shift+Down" = "move down";
+                        "${modifier}+Shift+Up" = "move up";
+                        "${modifier}+Shift+Right" = "move right";
+                        "${modifier}+b" = "split h";
+                        "${modifier}+v" = "split v";
+                        "${modifier}+r" = "mode 'resize'";
+                        "${modifier}+f" = "fullscreen toggle";
+                        "${modifier}+Shift+space" = "floating toggle";
+                        "${modifier}+s" = "layout stacking";
+                        "${modifier}+w" = "layout tabbed";
+                        "${modifier}+e" = "layout toggle split";
+                        "${modifier}+a" = "focus parent";
+                        "${modifier}+1" = "workspace 1 ";
+                        "${modifier}+2" = "workspace 2";
+                        "${modifier}+3" = "workspace 3";
+                        "${modifier}+4" = "workspace 4";
+                        "${modifier}+5" = "workspace 5";
+                        "${modifier}+6" = "workspace 6";
+                        "${modifier}+7" = "workspace 7";
+                        "${modifier}+8" = "workspace 8";
+                        "${modifier}+9" = "workspace 9";
+                        "${modifier}+0" = "workspace 10";
+                        "${modifier}+Shift+1" = "move container to workspace 1";
+                        "${modifier}+Shift+2" = "move container to workspace 2";
+                        "${modifier}+Shift+3" = "move container to workspace 3";
+                        "${modifier}+Shift+4" = "move container to workspace 4";
+                        "${modifier}+Shift+5" = "move container to workspace 5";
+                        "${modifier}+Shift+6" = "move container to workspace 6";
+                        "${modifier}+Shift+7" = "move container to workspace 7";
+                        "${modifier}+Shift+8" = "move container to workspace 8";
+                        "${modifier}+Shift+9" = "move container to workspace 9";
+                        "${modifier}+Shift+0" = "move container to workspace 10";
+                        "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+                        "${modifier}+Shift+c" = "reload";
+                        "${modifier}+Shift+s" = "exec grim -g $(slurp)";
+                        "${modifier}+Shift+q" = "kill";
+                        "XF86AudioPause" = "exec playerctl play-pause";
+                        "XF86AudioNext" = "exec playerctl next";
+                        "XF86AudioPrev" = "exec playerctl previous";
+                    }
+                    (mkIf gui.sway.desktop {
+                        "${modifier}+Control+s" = "exec steam";
+                        "${modifier}+Control+d" = "exec vesktop --enable-features=WebRTCPipeWireCapturer";
+                        "${modifier}+Control+x" = "exec feishin";
+                    })
+                    (mkIf laptop.backlight.enable {
+                        "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 5";
+                        "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 5";
+                    }) 
+                ];
 
                 startup = [] 
                 ++ optionals gui.sway.desktop [

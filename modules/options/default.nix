@@ -14,5 +14,6 @@
         ./networking.nix
         ./openssh.nix
         ./system.nix
+        ./laptop.nix
     ];
 }

@@ -13,5 +13,6 @@
         ./common.nix
         ./networking.nix
         ./games.nix
+        ./laptop.nix
     ];
 }

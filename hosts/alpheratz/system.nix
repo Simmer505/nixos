@@ -36,9 +36,8 @@
     boot.loader.efi.efiSysMountPoint = "/efi";
     boot.loader.efi.canTouchEfiVariables = true;
 
-    powerManagement.powertop.enable = true;
-
-    hardware.graphics.enable = true;
+    hardware.bluetooth.enable = true;
+    hardware.bluetooth.powerOnBoot = true;
 
     fileSystems = {
         "/".options = [ "compress=zstd" ];
