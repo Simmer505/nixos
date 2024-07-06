@@ -6,6 +6,7 @@
     lib,
     config,
     pkgs,
+    localPackages,
     ...
 }: {
 
@@ -30,6 +31,8 @@
         secrets."wireguard/preshared" = {};
     };
 
+    environment.systemPackages = [ localPackages.x86_64-linux.jhelioviewer ];
+
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.xbootldrMountPoint = "/boot";
@@ -51,7 +54,7 @@
             listenPort = 51820;
             privateKeyFile = "/run/secrets/wireguard/private";
             dns = [ "192.168.1.1" ];
-            autostart = false;
+            autostart = true;
 
             peers = [
                 {

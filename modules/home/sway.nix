@@ -16,11 +16,30 @@ in
         services.swayidle = {
             enable = true;
             timeouts = [
-                { 
+                (mkIf gui.sway.desktop { 
                     timeout = 600;
                     command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
                     resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
-                }
+                })
+                (mkIf (!gui.sway.desktop) {
+                    timeout = 300;
+                    command = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
+                })
+                (mkIf (!gui.sway.desktop) {
+                    timeout = 420;
+                    command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
+                    resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+                })
+                (mkIf (!gui.sway.desktop) {
+                    timeout = 600;
+                    command = "systemctl suspend";
+                })
+            ];
+            events = [
+                (mkIf (!gui.sway.desktop) {
+                    event = "before-sleep";
+                    command = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
+                })
             ];
                 
         };

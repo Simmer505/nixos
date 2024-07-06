@@ -33,6 +33,9 @@ in
         services.gnome.gnome-keyring.enable = mkIf cfg.secrets true;
         services.dbus.packages = mkIf cfg.secrets [ pkgs.gnome.seahorse ];
 
+        # Remove when nixpkgs issue 143365 is fixed
+        security.pam.services.swaylock = mkIf (!cfg.sway.desktop) {};
+
         xdg.portal.config.common = [ "wlr" "gtk" ];
         programs.thunar.enable = true;
 
