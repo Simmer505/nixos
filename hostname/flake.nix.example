@@ -1,6 +1,0 @@
-{
-    outputs { ... }: {
-        # Replace with system hostname and rename to flake.nix
-        hostname = "<hostname>";
-    };
-}
