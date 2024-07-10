@@ -16,8 +16,16 @@
         };
     };
 
+    environment.systemPackages = with pkgs; [
+        localPackages.x86_64-linux.jhelioviewer
+    ];
+
     hardware.graphics.extraPackages = with pkgs; [
         rocmPackages.clr.icd
+    ];
+
+    systemd.tmpfiles.rules = [
+        "L+    /opt/rocm/hip    -    -    -    -    ${pkgs.rocmPackages.clr}"
     ];
 
     # Use the systemd-boot EFI boot loader.
@@ -28,6 +36,11 @@
         "/".options = [ "compress=zstd" ];
         "/home".options = [ "compress=zstd" ];
         "/nix".options = [ "compress=zstd" "noatime" ];
+    };
+
+    virtualisation.docker = {
+        enable = true;
+        storageDriver = "btrfs";
     };
 
     # Set your time zone.

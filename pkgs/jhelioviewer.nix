@@ -4,6 +4,7 @@
 , jre
 , ant
 , jogl
+, libGL
 , fetchFromGitHub
 , makeDesktopItem
 , copyDesktopItems
@@ -60,6 +61,7 @@ stdenv.mkDerivation {
 
         mkdir $out/bin
         makeWrapper ${jre}/bin/java $out/bin/jhelioviewer \
+            --prefix LD_LIBRARY_PATH : ${libGL}/lib/ \
             --add-flags "-cp $out/share/java/JHelioviewer.jar" \
             --add-flags "--add-exports java.desktop/sun.awt=ALL-UNNAMED" \
             --add-flags "--add-exports java.desktop/sun.swing=ALL-UNNAMED" \

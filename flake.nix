@@ -16,6 +16,8 @@
 
         sops-nix.url = "github:Mic92/sops-nix";
 
+        llama-cpp.url = "github:ggerganov/llama.cpp";
+
     };
 
     outputs = inputs@{ self
@@ -179,6 +181,7 @@
                     pkgs = import nixpkgs {
                         inherit system;
                         overlays = with overlays; [ gamescope ];
+                        config.allowUnfree = true;
                     };
 
                     localPackages = pkgs.lib.genAttrs flake-utils.lib.defaultSystems (system: {
