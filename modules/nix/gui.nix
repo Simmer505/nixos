@@ -39,7 +39,7 @@ in
         xdg.portal.config.common = [ "wlr" "gtk" ];
         programs.thunar.enable = true;
 
-        hardware.graphics.enable = true;
+        hardware.opengl.enable = true;
 
         fonts = {
             packages = with pkgs; [
