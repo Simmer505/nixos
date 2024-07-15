@@ -20,6 +20,7 @@
 
     home.file.".config/nvim".source = ../shared/dotfiles/nvim;
     home.file.".tmux.conf".source = ../shared/dotfiles/tmux;
+    home.file.".config/fish/config.fish".source = ../shared/dotfiles/fish/cli-config.fish;
 
     programs.home-manager.enable = true;
 

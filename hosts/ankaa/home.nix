@@ -20,8 +20,9 @@
     };
 
     home.file.".config/nvim".source = ../shared/dotfiles/nvim;
+    home.file.".config/fish/config.fish".source = ../shared/dotfiles/fish/gui-config.fish;
+
     home.file.".config/waybar".source = ./dotfiles/waybar;
-    home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
     home.file.".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
     home.file.".ssh/config".source = ./dotfiles/ssh/config;
 

@@ -26,8 +26,3 @@ if status is-login
     set -x _JAVA_AWT_WM_NONREPARENTING "1"
 
 end
-
-if test (tty) = "/dev/tty1"
-    sway
-end
-
