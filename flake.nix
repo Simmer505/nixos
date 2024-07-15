@@ -180,7 +180,7 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [ gamescope ];
+                        overlays = with overlays; [];
                         config.allowUnfree = true;
                     };
 
