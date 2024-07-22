@@ -44,7 +44,9 @@ in
             };
         };
 
-        programs.fish.enable = mkIf (cfg.shell == "fish") true;
+        programs.fish = mkIf (cfg.shell == "fish") {
+            enable = true;
+        };
     };
 
 }

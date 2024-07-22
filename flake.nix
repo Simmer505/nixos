@@ -89,7 +89,7 @@
                                     resolution = "3440x1440";
                                     refreshRate = 144;
                                     x = 1920;
-                                    wallpaper = "ship_moon.png";
+                                    wallpaper = "solar_system.png";
                                 })
                                 (utils.mkMonitor {
                                     monitor = "HDMI-A-1";
@@ -233,7 +233,7 @@
                         ];
                     };
                 })
-            configs
+                configs
             );
         };
 }

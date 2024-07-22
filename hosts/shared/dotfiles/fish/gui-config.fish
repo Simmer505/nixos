@@ -1,6 +1,8 @@
 if status is-interactive
     fish_add_path "/home/eesim/.cargo/bin/"
 
+    abbr ll 'eza'
+
     set fish_greeting
 
     set -g fish_key_bindings fish_vi_key_bindings

@@ -18,7 +18,10 @@
 
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
+        lemurs
     ];
+
+    services.hardware.openrgb.enable = true;
 
     hardware.graphics.extraPackages = with pkgs; [
         rocmPackages.clr.icd
@@ -54,7 +57,7 @@
     # Define a user account.
     users.users.eesim = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "video" "audo" "networkmanager" ];
+        extraGroups = [ "wheel" "video" "audio" "networkmanager" "dialout" ];
         packages = with pkgs; [];
         shell = pkgs.fish;
         openssh.authorizedKeys.keys = [

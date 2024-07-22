@@ -54,14 +54,14 @@ stdenv.mkDerivation {
 
         install -Dm644 JHelioviewer.jar $out/share/java/
 
-        cp -r lib/* $out/share/java/lib/
+        cp -rv lib/* $out/share/java/lib/
 
         rm $out/share/java/lib/jogl/*.jar
         cp -v ${jogl}/share/java/jogl*.jar ${jogl}/share/java/glue*.jar $out/share/java/lib/jogl
 
         mkdir $out/bin
         makeWrapper ${jre}/bin/java $out/bin/jhelioviewer \
-            --prefix LD_LIBRARY_PATH : ${libGL}/lib/ \
+            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libGL ]} \
             --add-flags "-cp $out/share/java/JHelioviewer.jar" \
             --add-flags "--add-exports java.desktop/sun.awt=ALL-UNNAMED" \
             --add-flags "--add-exports java.desktop/sun.swing=ALL-UNNAMED" \
