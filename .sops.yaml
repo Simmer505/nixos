@@ -9,13 +9,14 @@ creation_rules:
       - *admin_ankaa
       - *admin_alpheratz
   - path_regex: secrets/ankaa/[^/]+\.yaml$
+    kye_groups:
     - age:
       - *admin_ankaa
   - path_regex: secrets/alpheratz/[^/]+\.yaml$
     key_groups:
     - age:
       - *admin_alpheratz
-  - path_regex: secrets/diphda/[^/]+\.yaml$
+  - path_regex: secrets/diphda/[^/]+\.(yaml|keytab)$
     key_groups:
     - age:
       - *admin_ankaa
