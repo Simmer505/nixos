@@ -70,6 +70,17 @@
         };
     };
 
+    security.acme = {
+        acceptTerms = true;
+        certs."download.simmer505.com" = {
+            dnsProvider = "porkbun";
+            environmentFile = "${pkgs.writeText "porkbun-creds" ''
+                INWX_USERNAME=${pkgs.readFile}
+                INWX_PASSWORD=${pkgs.readFile}
+            ''}";
+        };
+    };
+
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
