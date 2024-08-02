@@ -21,6 +21,8 @@
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
         secrets."mc-arcadia/repo_password" = {};
+        secrets."porkbun/secret_key" = {};
+        secrets."porkbun/api_key" = {};
     };
 
     systemd.timers."mc-arcadia-backup" = {
@@ -72,11 +74,12 @@
 
     security.acme = {
         acceptTerms = true;
+        defaults.email = "eesimmons9105@gmail.com";
         certs."download.simmer505.com" = {
             dnsProvider = "porkbun";
             environmentFile = "${pkgs.writeText "porkbun-creds" ''
-                INWX_USERNAME=${pkgs.readFile}
-                INWX_PASSWORD=${pkgs.readFile}
+                PORKBUN_SECRET_API_KEY="$(cat ${config.sops.secrets."porkbun/api_key".path})"
+                PORKBUN_API_KEY="$(cat ${config.sops.secrets."porkbun/api_key".path})"
             ''}";
         };
     };
