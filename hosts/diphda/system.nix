@@ -21,8 +21,10 @@
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
         secrets."mc-arcadia/repo_password" = {};
-        secrets."porkbun/secret_key" = {};
-        secrets."porkbun/api_key" = {};
+        secrets."porkbun.keytab" = {
+            format = "binary";
+            sopsFile = ./porkbun.keytab;
+        };
     };
 
     systemd.timers."mc-arcadia-backup" = {
