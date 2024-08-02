@@ -23,7 +23,7 @@
         secrets."mc-arcadia/repo_password" = {};
         secrets."porkbun.keytab" = {
             format = "binary";
-            sopsFile = ./porkbun.keytab;
+            sopsFile = ../../secrets/diphda/porkbun.keytab;
         };
     };
 
@@ -63,11 +63,12 @@
         serviceConfig = {
             Type = "simple";
             User = "eesim";
+            Group = "acme";
             WorkingDirectory = "/home/eesim/scripts";
             ExecStart = ''
                 /home/eesim/scripts/dl_manager_tokio -vv \
-                    -c /home/eesim/scripts/certs/fullchain.cer \
-                    -k /home/eesim/scripts/certs/download.simmer505.com.key \
+                    -c /var/lib/acme/download.simmer505.com/cert.pem \
+                    -k /var/lib/acme/download.simmer505.com/key.pem \
                     --script-dir /home/eesim/scripts/ \
                     0.0.0.0:11112
             '';
@@ -79,10 +80,7 @@
         defaults.email = "eesimmons9105@gmail.com";
         certs."download.simmer505.com" = {
             dnsProvider = "porkbun";
-            environmentFile = "${pkgs.writeText "porkbun-creds" ''
-                PORKBUN_SECRET_API_KEY="$(cat ${config.sops.secrets."porkbun/api_key".path})"
-                PORKBUN_API_KEY="$(cat ${config.sops.secrets."porkbun/api_key".path})"
-            ''}";
+            environmentFile = "${config.sops.secrets."porkbun.keytab".path}";
         };
     };
 
