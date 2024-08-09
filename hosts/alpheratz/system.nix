@@ -33,6 +33,13 @@
 
     environment.systemPackages = [ localPackages.x86_64-linux.jhelioviewer ];
 
+    services.printing.enable = true;
+    services.avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+    };
+
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.xbootldrMountPoint = "/boot";

@@ -213,6 +213,7 @@
                             {
                                 networking.hostName = hostname;
                                 simmer = config.options;
+                                nix.settings.trusted-users = [ "eesim" ];
                             }
                             systemConfig
                             (./. + "/hosts/${hostname}/hardware-configuration.nix")

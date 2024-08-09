@@ -19,6 +19,7 @@
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
         lemurs
+        pciutils
     ];
 
     services.hardware.openrgb.enable = true;
@@ -34,6 +35,8 @@
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+
+    boot.kernelPackages = pkgs.linuxPackages_6_1;
 
     fileSystems = {
         "/".options = [ "compress=zstd" ];
