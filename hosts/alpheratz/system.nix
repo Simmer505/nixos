@@ -61,7 +61,7 @@
             listenPort = 51820;
             privateKeyFile = "/run/secrets/wireguard/private";
             dns = [ "192.168.1.1" ];
-            autostart = true;
+            autostart = false;
 
             peers = [
                 {
