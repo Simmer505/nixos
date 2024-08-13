@@ -21,6 +21,8 @@
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
         secrets."mc-arcadia/repo_password" = {};
+        secrets."tandoor/secret_key" = {};
+        secrets."tandoor/db_password" = {};
         secrets."porkbun.keytab" = {
             format = "binary";
             sopsFile = ../../secrets/diphda/porkbun.keytab;
