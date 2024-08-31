@@ -247,6 +247,11 @@ in
             smart_gaps inverse_outer
 
             '';
+
+            extraSessionCommands = mkIf gui.secrets ''
+                eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh);
+                export SSH_AUTH_SOCK;
+            '';
         };
     };
 }

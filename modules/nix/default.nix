@@ -14,5 +14,6 @@
         ./networking.nix
         ./games.nix
         ./laptop.nix
+        ./school
     ];
 }

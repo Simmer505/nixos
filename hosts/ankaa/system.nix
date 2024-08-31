@@ -18,8 +18,6 @@
 
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
-        lemurs
-        pciutils
     ];
 
     services.hardware.openrgb.enable = true;

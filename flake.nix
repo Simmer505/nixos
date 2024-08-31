@@ -133,7 +133,6 @@
                         gui = {
                             enable = true;
                             protonmail = true;
-                            matrix = true;
 
                             sway = {
                                 enable = true;
@@ -146,6 +145,11 @@
                                 refreshRate = 60;
                             };
 
+                        };
+
+                        school = {
+                            enable = true;
+                            citrix = true;
                         };
 
                         common.nil.enable = true;

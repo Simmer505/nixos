@@ -31,7 +31,9 @@
         secrets."wireguard/preshared" = {};
     };
 
-    environment.systemPackages = [ localPackages.x86_64-linux.jhelioviewer ];
+    environment.systemPackages = [
+        localPackages.x86_64-linux.jhelioviewer
+        ];
 
     services.printing.enable = true;
     services.avahi = {
@@ -68,7 +70,7 @@
                     publicKey = "sWdXHlBqH+tAgSl0Tqr46sfKvgFN/vMDiuN08HjzaSg=";
                     presharedKeyFile = "/run/secrets/wireguard/preshared";
                     allowedIPs = [ "0.0.0.0/0" "::/0" ];
-                    endpoint = "simmer505.com:51820";
+                    endpoint = "jellyfin.simmer505.com:51820";
                 }
             ];
         };
@@ -83,7 +85,7 @@
     # Define a user account.
     users.users.eesim = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "video" "audo" "networkmanager" ];
+        extraGroups = [ "wheel" "video" "audio" "networkmanager" ];
         shell = pkgs.fish;
     };
 

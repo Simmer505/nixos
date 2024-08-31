@@ -23,6 +23,7 @@ in
             yazi
             ncdu
             btop
+            pciutils
         ]
         ++ optional cfg.nil.enable nil;
 
