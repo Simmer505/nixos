@@ -75,7 +75,6 @@
                         gui = {
                             enable = true;
                             protonmail = true;
-                            matrix = true;
                             gtk = false;
 
                             sway = {
@@ -88,16 +87,21 @@
                                     monitor = "DP-2";
                                     resolution = "3440x1440";
                                     refreshRate = 144;
-                                    x = 1920;
                                     wallpaper = "solar_system.png";
                                 })
                                 (utils.mkMonitor {
                                     monitor = "HDMI-A-1";
                                     resolution = "1920x1080";
+                                    x = 3440;
                                     refreshRate = 75;
                                 })
                             ];
 
+                        };
+
+                        school = {
+                            enable = true;
+                            citrix.enable = true;
                         };
 
                         games = {
