@@ -18,6 +18,7 @@
 
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
+        printrun
         pciutils
     ];
 

@@ -14,7 +14,7 @@ in
             ports = [ cfg.port ];
             settings = {
                 PermitRootLogin = "no";
-                PasswordAuthentication = false;
+                PasswordAuthentication = cfg.allow-password;
             };
         };
     };

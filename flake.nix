@@ -46,7 +46,7 @@
                     options = {
                         openssh = {
                             enable = true;
-                            port = 2222;
+                            allow-password = true;
                         };
 
                         backup = {
@@ -188,7 +188,7 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [];
+                        overlays = with overlays; [ printrun ];
                         config.allowUnfree = true;
                     };
 
