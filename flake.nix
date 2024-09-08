@@ -46,7 +46,7 @@
                     options = {
                         openssh = {
                             enable = true;
-                            allow-password = true;
+                            port = 2222;
                         };
 
                         backup = {
