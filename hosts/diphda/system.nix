@@ -21,8 +21,12 @@
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
         secrets."mc-arcadia/repo_password" = {};
-        secrets."tandoor/secret_key" = {};
-        secrets."tandoor/db_password" = {};
+        secrets."tandoor/secret_key" = {
+            owner = "tandoor";
+        };
+        secrets."tandoor/db_password" = {
+            owner = "tandoor";
+        };
         secrets."porkbun.keytab" = {
             format = "binary";
             sopsFile = ../../secrets/diphda/porkbun.keytab;
@@ -77,6 +81,27 @@
         };
     };
 
+    systemd.services."qbit-update-port" = {
+        enable = true;
+        path = [ pkgs.bash pkgs.docker pkgs.curl pkgs.netcat ];
+        serviceConfig = {
+            Type = "oneshot";
+            User = "root";
+            Group = "root";
+            ExecStart = ''
+                /home/eesim/configs/qbittorrent/update-port.sh
+            '';
+        };
+    };
+
+    systemd.timers."qbit-update-port" = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+            OnCalendar = "*:0/5";
+            Persistent = true;
+        };
+    };
+
     security.acme = {
         acceptTerms = true;
         defaults.email = "eesimmons9105@gmail.com";
@@ -120,6 +145,18 @@
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEO9a9lCSa84Acv0SqOI608IJGa61dT5Frbw2Y/ABCB9 eesim@ankaa"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDvWgI2hkcjZvI9LcBEbH+1OuC3ULImTmd1qzOgcIuE7 eesim@alpheratz"
         ];
+    };
+
+    users.users.tandoor = {
+        uid = 701;
+        group = "services";
+        extraGroups = [ "keys" ];
+    };
+
+    users.groups = {
+        services = {
+            gid = 1001;
+        };
     };
 
     system.stateVersion = "23.11";
