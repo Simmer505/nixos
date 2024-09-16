@@ -101,7 +101,7 @@
 
                         school = {
                             enable = true;
-                            citrix.enable = true;
+                            citrix = true;
                         };
 
                         games = {

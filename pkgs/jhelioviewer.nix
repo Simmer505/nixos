@@ -18,8 +18,8 @@ stdenv.mkDerivation {
     src = fetchFromGitHub {
         owner = "Helioviewer-Project";
         repo = "JHelioviewer-SWHV";
-        rev = "537b60bbf4c40e46b98d7a1c0167f3c943e73cd2";
-        hash = "sha256-LBiywlXAgMifn6ov04CwEnfhSWskSzIy5Cs3NeL90Ts=";
+        rev = "c1affb8a820fb2785d7598a59dad3691bf42298c";
+        hash = "sha256-CGpWPKsGQsX+3aaqws351hy2xCST/x+Md+dRBov1vog=";
     };
 
     nativeBuildInputs = [ 
