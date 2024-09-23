@@ -31,8 +31,9 @@
         secrets."wireguard/preshared" = {};
     };
 
-    environment.systemPackages = [
+    environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
+        bottles
         ];
 
     services.printing.enable = true;
