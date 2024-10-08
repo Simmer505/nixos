@@ -36,7 +36,7 @@
         bottles
         ];
 
-    services.printing.enable = true;
+    services.printing.enable = false;
     services.avahi = {
         enable = true;
         nssmdns4 = true;

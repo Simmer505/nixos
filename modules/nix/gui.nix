@@ -50,6 +50,8 @@ in
                 ubuntu_font_family
                 vazir-fonts
                 font-awesome
+                corefonts
+                carlito
             ];
              fontconfig = {
 
