@@ -192,7 +192,7 @@ in
 
                 input."type:keyboard" = {
                     xkb_layout = "us,de";
-                    xkb_options = "grp:shifts_toggle";
+                    xkb_options = "grp:toggle";
                 };
                 
                 output = gui.monitors;

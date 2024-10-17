@@ -114,6 +114,7 @@
 
                         networking = {
                             wireguard.enable = true;
+                            firewall.allowedTCPPorts = [ 8080 ];
                         };
                     };
                 }
@@ -189,7 +190,7 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [ printrun ];
+                        overlays = with overlays; [ printrun llama-cpp ];
                         config.allowUnfree = true;
                     };
 

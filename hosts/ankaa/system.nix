@@ -20,6 +20,8 @@
         localPackages.x86_64-linux.jhelioviewer
         printrun
         pciutils
+        llama-cpp
+        bottles
     ];
 
     services.hardware.openrgb.enable = true;

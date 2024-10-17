@@ -1,4 +1,4 @@
 { inputs, ... }:
 final: prev: {
-    llama-cpp = inputs.llama-cpp.packages.rocm;
+    llama-cpp = prev.llama-cpp.override { rocmSupport = true; };
 }
