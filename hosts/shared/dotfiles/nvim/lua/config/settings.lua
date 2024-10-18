@@ -10,6 +10,16 @@ vim.opt.softtabstop=4
 vim.opt.shiftwidth=4
 vim.opt.shiftround=true
 
+vim.api.nvim_create_autocmd(
+    { "FileType" },
+    { pattern = "nix",
+      callback = function() 
+          vim.opt.softtabstop=2
+	  vim.opt.shiftwidth=2
+      end
+    }
+)
+
 vim.opt.backspace={'indent','eol','start'}
 vim.opt.hidden=true
 vim.opt.laststatus=2

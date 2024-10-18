@@ -25,7 +25,7 @@
 
     sops = {
         defaultSopsFile = ../../secrets/alpheratz/secrets.yaml;
-        age.keyFile = "/home/eesim/.config/sops/age/keys.txt";
+        age.sshKeyPaths = [ "/etc/ssh/host_key_ed25519" ];
 
         secrets."wireguard/private" = {};
         secrets."wireguard/preshared" = {};
@@ -63,7 +63,7 @@
             address = [ "10.0.0.2/32" ];
             listenPort = 51820;
             privateKeyFile = "/run/secrets/wireguard/private";
-            dns = [ "192.168.1.1" ];
+            dns = [ "10.0.0.1" ];
             autostart = false;
 
             peers = [

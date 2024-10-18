@@ -69,10 +69,10 @@ in
                         "${modifier}+Down" = "focus down";
                         "${modifier}+Up" = "focus up";
                         "${modifier}+Right" = "focus right";
-                        "${modifier}+Shift+h" = "move left";
-                        "${modifier}+Shift+j" = "move down";
-                        "${modifier}+Shift+k" = "move up";
-                        "${modifier}+Shift+l" = "move right";
+                        "${modifier}+Shift+h" = "move left 30px";
+                        "${modifier}+Shift+j" = "move down 30px";
+                        "${modifier}+Shift+k" = "move up 30px";
+                        "${modifier}+Shift+l" = "move right 30px";
                         "${modifier}+Shift+Left" = "move left";
                         "${modifier}+Shift+Down" = "move down";
                         "${modifier}+Shift+Up" = "move up";
@@ -110,6 +110,7 @@ in
                         "${modifier}+Shift+c" = "reload";
                         "${modifier}+Shift+s" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"/home/eesim/Pictures/$(date +'%s_grim.png')\"";
                         "${modifier}+Shift+q" = "kill";
+                        "${modifier}+p" = "focus mode_toggle";
                         "XF86AudioPause" = "exec playerctl play-pause";
                         "XF86AudioNext" = "exec playerctl next";
                         "XF86AudioPrev" = "exec playerctl previous";
@@ -212,6 +213,7 @@ in
                         { criteria = { class = "gamescope"; }; command = "fullscreen"; }
                         { criteria = { app_id = "gamescope"; }; command = "fullscreen"; }
                         { criteria = { app_id = "mpv"; }; command = "fullscreen"; }
+                        { criteria = { app_id = "org.speedcrunch."; }; command = "floating enable"; }
                     ];
                 };
 
