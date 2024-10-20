@@ -14,7 +14,6 @@ in
         environment.systemPackages = with pkgs; [
             xournalpp
             libreoffice
-            anki
         ] ++ optional cfg.citrix citrix;
     };
 }

@@ -15,6 +15,7 @@ in
             curl
             wget
             git
+            jujutsu
             killall
             vim
             eza

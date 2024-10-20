@@ -14,13 +14,32 @@ in
             type = types.bool;
             default = true;
         };
+
+        jujutsu = {
+            enable = mkOption {
+                description = "Whether to install and configure jujutsu";
+                type = types.bool;
+                default = true;
+            };
+        };
     };
 
-    config = mkIf cfg.enable {
-        programs.git = {
+
+    config = {
+        programs.git = mkIf cfg.enable {
             enable = true;
             userName = "Ethan Simmons";
-            userEmail = "eesimmons9105@gmail.com";
+            userEmail = "contact@esimmons.me";
+        };
+        programs.jujutsu = mkIf cfg.jujutsu.enable {
+            enable = true;
+            settings = {
+                user = {
+                    name = "Ethan Simmons";
+                    email = "contact@esimmons.me";
+                };
+                ui.paginate = "never";
+            };
         };
     };
 }
