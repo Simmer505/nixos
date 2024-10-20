@@ -190,7 +190,7 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [ printrun llama-cpp ];
+                        overlays = with overlays; [ printrun llama-cpp citrix ];
                         config.allowUnfree = true;
                     };
 
