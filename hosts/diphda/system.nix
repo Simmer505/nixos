@@ -21,6 +21,7 @@
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
         secrets."mc-arcadia/repo_password" = {};
+        secrets."mc-dh/repo_password" = {};
         secrets."tandoor/secret_key" = {
             owner = "tandoor";
         };
@@ -38,7 +39,7 @@
         };
     };
 
-    systemd.timers."mc-arcadia-backup" = {
+    systemd.timers."mc-dh-backup" = {
         wantedBy = [ "timers.target" ];
         timerConfig = {
             OnCalendar = "*-*-* *:00:00";
@@ -46,14 +47,14 @@
         };
     };
 
-    systemd.services."mc-arcadia-backup" = {
+    systemd.services."mc-dh-backup" = {
         enable = true;
         preStart = ''
-            ${pkgs.docker}/bin/docker exec mc-arcadia-mc-1 mc-send-to-console say Server backup starting in 5 minutes
+            ${pkgs.docker}/bin/docker exec mc-distant-horizons-mc-1 mc-send-to-console say Server backup starting in 5 minutes
             sleep 5m
         '';
         postStart = ''
-            ${pkgs.docker}/bin/docker exec mc-arcadia-mc-1 mc-send-to-console say Server backup starting
+            ${pkgs.docker}/bin/docker exec mc-distant-horizons-mc-1 mc-send-to-console say Server backup starting
         '';
         serviceConfig = {
             Type = "oneshot"; 
@@ -61,7 +62,7 @@
             ExecStart = ''
                 systemd-inhibit --who="borgmatic" \
                 --why="Prevent interrupting scheduled backup" \
-                ${pkgs.borgmatic}/bin/borgmatic -c /etc/nixos/hosts/diphda/mc-arcadia-backup.yaml --verbosity 1 --syslog-verbosity 1
+                ${pkgs.borgmatic}/bin/borgmatic -c /etc/nixos/hosts/diphda/mc-dh-backup.yaml --verbosity 1 --syslog-verbosity 1
                 '';
         };
     };
