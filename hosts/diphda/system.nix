@@ -31,6 +31,11 @@
             format = "binary";
             sopsFile = ../../secrets/diphda/porkbun.keytab;
         };
+        secrets."caddy-porkbun.keytab" = {
+            format = "binary";
+            sopsFile = ../../secrets/diphda/porkbun.keytab;
+            path = "/home/eesim/configs/caddy/.env";
+        };
     };
 
     systemd.timers."mc-arcadia-backup" = {
@@ -100,6 +105,12 @@
             OnCalendar = "*:0/5";
             Persistent = true;
         };
+    };
+
+    services.mpd = {
+        enable = true;
+        musicDirectory = "/media/Music";
+        network.listenAddress = "any";
     };
 
     security.acme = {
