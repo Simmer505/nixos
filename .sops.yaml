@@ -2,7 +2,7 @@ keys:
   - &admin_ankaa age1079fszreaakwf6xnwu9kra8xcsp4e8q8ed3y99yrhjnz9n3t9pnsj05m97
   - &admin_alpheratz age1gdtjn3jgvvvspa86q3lnklflnvyf3s75y2rw23l7nk7hwcsfpg7qkq7msr
   - &diphda age1rxqyz6watg05r3rzlme7grpgfgezhlt535gdl7psqys2ec8eegmqchfk4d
-  - &alpheratz age13ganuxy7r6fe53xaqm7k9pp07adlvk4hm4s2xkmwdwqs8xrdr3xquw0d73
+  - &alpheratz age1cla0k3yffcelphkrmgz5upc0chgtdef25ne833jeqtapceux59rqkmhxf7
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:

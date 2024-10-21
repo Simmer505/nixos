@@ -25,7 +25,7 @@
 
     sops = {
         defaultSopsFile = ../../secrets/alpheratz/secrets.yaml;
-        age.sshKeyPaths = [ "/etc/ssh/host_key_ed25519" ];
+        age.keyFile = "/etc/sops.key";
 
         secrets."wireguard/private" = {};
         secrets."wireguard/preshared" = {};
