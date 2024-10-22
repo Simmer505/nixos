@@ -32,11 +32,8 @@
             format = "binary";
             sopsFile = ../../secrets/diphda/porkbun.keytab;
         };
-        secrets."caddy-porkbun.keytab" = {
-            format = "binary";
-            sopsFile = ../../secrets/diphda/porkbun.keytab;
-            path = "/home/eesim/configs/caddy/.env";
-        };
+        secrets."caddy/porkbun_api_key" = {};
+        secrets."caddy/porkbun_secret_key" = {};
     };
 
     systemd.timers."mc-dh-backup" = {
