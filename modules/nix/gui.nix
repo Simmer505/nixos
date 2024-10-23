@@ -45,7 +45,7 @@ in
             packages = with pkgs; [
                 liberation_ttf
                 noto-fonts
-                noto-fonts-cjk
+                noto-fonts-cjk-sans
                 noto-fonts-extra
                 ubuntu_font_family
                 vazir-fonts
