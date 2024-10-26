@@ -137,6 +137,7 @@
 
     environment.systemPackages = with pkgs; [
         docker-compose
+        beets-unstable
     ];
 
     # Set your time zone.
