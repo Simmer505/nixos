@@ -22,6 +22,7 @@
         pciutils
         llama-cpp
         bottles
+        inkscape
     ];
 
     services.hardware.openrgb.enable = true;
