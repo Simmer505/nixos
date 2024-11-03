@@ -212,6 +212,7 @@ in
                         { criteria = { class = "feishin"; }; command = "opacity 0.9"; }
                         { criteria = { class = "gamescope"; }; command = "fullscreen"; }
                         { criteria = { app_id = "gamescope"; }; command = "fullscreen"; }
+                        { criteria = { class = "Wfica"; }; command = "fullscreen"; }
                         { criteria = { app_id = "mpv"; }; command = "fullscreen"; }
                         { criteria = { app_id = "org.speedcrunch."; }; command = "floating enable"; }
                     ];
