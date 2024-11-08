@@ -27,6 +27,10 @@
 
     services.hardware.openrgb.enable = true;
 
+    services.udev.extraRules = ''
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+    '';
+
     hardware.graphics.extraPackages = with pkgs; [
         rocmPackages.clr.icd
     ];
