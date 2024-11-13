@@ -12,5 +12,6 @@
         ./qt.nix
         ./sway.nix
         ./gtk.nix
+        ./term.nix
     ];
 }

@@ -162,6 +162,8 @@
                         networking = {
                             wireguard.enable = true;
                         };
+
+                        term.terminal = "kitty";
                     };
                 }
                 {

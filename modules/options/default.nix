@@ -16,5 +16,6 @@
         ./system.nix
         ./laptop.nix
         ./school.nix
+        ./term.nix
     ];
 }

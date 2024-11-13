@@ -8,6 +8,7 @@
 
 with lib; let
     gui = config.simmer.gui;
+    term = config.simmer.term;
     laptop = config.simmer.laptop;
     modifier = "Mod4";
 in
@@ -56,7 +57,7 @@ in
                         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
                         "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
                         "${modifier}+space" = "exec \"kickoff-dot-desktop | ${pkgs.kickoff}/bin/kickoff --from-stdin --stdout | xargs -d '\\n' ${pkgs.sway}/bin/swaymsg exec\"";
-                        "${modifier}+Return" = "exec alacritty ";
+                        "${modifier}+Return" = "exec ${term.terminal}";
                         "${modifier}+Control+f" = "exec MOZ_ENABLE_WAYLAND=1 firefox";
                         "${modifier}+Control+t" = "exec thunar";
                         "${modifier}+Control+h" = "exec helvum";
@@ -209,6 +210,7 @@ in
                     commands = [
                         { criteria = { class = "vesktop"; }; command = "opacity 0.9"; }
                         { criteria = { app_id = "Alacritty"; }; command = "opacity 0.9"; }
+                        { criteria = { app_id = "kitty"; }; command = "opacity 0.9"; }
                         { criteria = { class = "feishin"; }; command = "opacity 0.9"; }
                         { criteria = { class = "gamescope"; }; command = "fullscreen"; }
                         { criteria = { app_id = "gamescope"; }; command = "fullscreen"; }

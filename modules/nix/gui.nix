@@ -24,7 +24,6 @@ in
             mpv
             feh
         ]
-        ++ [ cfg.terminal ]
         ++ optional cfg.matrix cinny-desktop
         ++ optional cfg.secrets libsecret
         ++ optionals cfg.protonmail [ thunderbird protonmail-bridge ];

@@ -33,12 +33,6 @@ in
 
         };
 
-        terminal = mkOption {
-            description = "Which terminal to install (alacritty)";
-            type = types.enum [ pkgs.alacritty ];
-            default = pkgs.alacritty;
-        };
-
         gtk = mkOption {
             description = "Whether to configure gtk";
             type = types.bool;
