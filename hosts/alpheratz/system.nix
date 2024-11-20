@@ -29,6 +29,7 @@
 
         secrets."wireguard/private" = {};
         secrets."wireguard/preshared" = {};
+        secrets."borgbase/nix-alpheratz" = {};
     };
 
     environment.systemPackages = with pkgs; [
@@ -64,7 +65,7 @@
             listenPort = 51820;
             privateKeyFile = "/run/secrets/wireguard/private";
             dns = [ "10.0.0.1" ];
-            autostart = false;
+            autostart = true;
 
             peers = [
                 {

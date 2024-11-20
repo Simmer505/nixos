@@ -152,6 +152,19 @@
 
                         };
 
+                        backup = {
+                          enable = true;
+                          user = "eesim";
+                          paths = [ "/home/eesim" ];
+                          repo = "t643s856@t643s856.repo.borgbase.com:repo";
+                          excludes = [
+                            "/home/eesim/.cache/"
+                          ];
+                          key = "/home/eesim/.ssh/id_ed25519";
+                          passphrase = "/run/secrets/borgbase/nix-alpheratz";
+                          repeat = "daily";
+                        };
+
                         school = {
                             enable = true;
                             citrix = true;
