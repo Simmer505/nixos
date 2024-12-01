@@ -23,6 +23,7 @@
         llama-cpp
         bottles
         inkscape
+        orca-slicer
     ];
 
     services.hardware.openrgb.enable = true;
