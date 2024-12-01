@@ -18,6 +18,7 @@ in
 
         programs.steam = mkIf cfg.steam.enable {
             enable = true;
+            extraCompatPackages = with pkgs; [ proton-ge-bin ];
         };
     };
 }

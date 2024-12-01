@@ -211,8 +211,6 @@
 
                     localPackages = pkgs.lib.genAttrs flake-utils.lib.defaultSystems (system: {
                             kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix {};
-                            gamescope-old = pkgs.callPackage ./pkgs/gamescope-old {};
-                            gamescope-dbg = pkgs.callPackage ./pkgs/gamescope-dbg {};
                             jhelioviewer = pkgs.callPackage ./pkgs/jhelioviewer.nix {};
                         }
                     );

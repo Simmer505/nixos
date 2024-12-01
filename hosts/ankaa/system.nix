@@ -27,6 +27,7 @@
     ];
 
     services.hardware.openrgb.enable = true;
+    services.avahi.enable = true;
 
     services.udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
