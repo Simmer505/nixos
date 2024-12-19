@@ -157,24 +157,27 @@
 
                         };
 
-                        backup = {
-                          enable = true;
-                          user = "eesim";
-                          paths = [ "/home/eesim" ];
-                          repo = "t643s856@t643s856.repo.borgbase.com:repo";
-                          excludes = [
-                            "/home/eesim/.cache/"
-                            "/home/eesim/configs/mc-distant-horizons"
-                            "/home/eesim/configs/mc-arcadia"
-                          ];
-                          key = "/home/eesim/.ssh/id_ed25519";
-                          passphrase = "/run/secrets/borgbase/nix-alpheratz";
-                          repeat = "daily";
-                        };
-
                         school = {
                             enable = true;
                             citrix = true;
+                        };
+
+                        games = {
+                          enable = true;
+                        };
+ 
+                        backup = {
+                           user = "eesim";
+                           paths = [ "/home/eesim" ];
+                           repo = "t643s856@t643s856.repo.borgbase.com:repo";
+                           excludes = [
+                              "/home/eesim/.cache/"
+                              "/home/eesim/configs/mc-distant-horizons"
+                              "/home/eesim/configs/mc-arcadia"
+                           ];
+                           key = "/home/eesim/.ssh/id_ed25519";
+                           passphrase = "/run/secrets/borgbase/nix-alpheratz";
+                           repeat = "daily";
                         };
 
                         common.nil.enable = true;

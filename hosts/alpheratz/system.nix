@@ -29,13 +29,15 @@
 
         secrets."wireguard/private" = {};
         secrets."wireguard/preshared" = {};
-        secrets."borgbase/nix-alpheratz" = {};
+        secrets."borgbase/nix-alpheratz" = {
+          owner = "eesim";
+        };
     };
 
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
         bottles
-        ];
+    ];
 
     services.printing.enable = false;
     services.avahi = {
