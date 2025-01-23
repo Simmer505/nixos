@@ -18,7 +18,7 @@ in
             };
             iconTheme = {
                 name = "awaidta-dark";
-                package = pkgs.gnome.adwaita-icon-theme;
+                package = pkgs.adwaita-icon-theme;
             };
             theme = {
                 name = "adw-gtk3-dark";

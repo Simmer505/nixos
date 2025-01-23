@@ -18,9 +18,9 @@
 
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
+        localPackages.x86_64-linux.llama-cpp
         printrun
         pciutils
-        llama-cpp
         bottles
         inkscape
         orca-slicer

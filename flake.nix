@@ -27,6 +27,7 @@
                      , home-manager-unstable
                      , flake-utils
                      , sops-nix
+                     , llama-cpp
                      , ...
                      }:
         let
@@ -205,13 +206,19 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [ printrun llama-cpp citrix ];
-                        config.allowUnfree = true;
+                        overlays = with overlays; [ printrun citrix ];
+                        config = {
+                          allowUnfree = true;
+                          permittedInsecurePackages = [
+                            "electron-31.7.7"
+                          ];
+                        };
                     };
 
                     localPackages = pkgs.lib.genAttrs flake-utils.lib.defaultSystems (system: {
                             kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix {};
                             jhelioviewer = pkgs.callPackage ./pkgs/jhelioviewer.nix {};
+                            llama-cpp = llama-cpp.packages.${system}.rocm;
                         }
                     );
 
