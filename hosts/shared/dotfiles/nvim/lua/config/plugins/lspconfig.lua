@@ -28,7 +28,7 @@ lspconfig.omnisharp.setup {
     cmd = { "dotnet", "/usr/lib/omnisharp-roslyn/OmniSharp.dll"}
 }
 
-local default_servers = {'pylsp', 'ccls', 'typst_lsp', 'r_language_server', 'lua_ls', 'nil_ls'}
+local default_servers = {'pylsp', 'ccls', 'r_language_server', 'lua_ls', 'nil_ls', 'tinymist'}
 
 for _, lsp in ipairs(default_servers) do
     lspconfig[lsp].setup {
