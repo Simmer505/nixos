@@ -58,6 +58,10 @@
                             excludes = [ 
                                 "/home/eesim/.local/share/Steam/steamapps/common"
                                 "/home/eesim/.cache"
+                                "/home/eesim/llama/models"
+                                "/home/eesim/.local/share/Trash"
+                                "/home/eesim/Games"
+                                "/home/eesim/nixpkgs"
                             ];
                             passphrase = "/home/eesim/.ssh/borgbase_passphrase";
                             key = "/home/eesim/.ssh/id_ed25519_borgbase";
