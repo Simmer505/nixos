@@ -20,8 +20,13 @@
         defaultSopsFile = ../../secrets/diphda/secrets.yaml;
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
+        secrets."backup/repo_password" = {
+          owner = "eesim";
+        };
+
         secrets."mc-arcadia/repo_password" = {};
         secrets."mc-dh/repo_password" = {};
+
         secrets."tandoor/secret_key" = {
             owner = "tandoor";
         };

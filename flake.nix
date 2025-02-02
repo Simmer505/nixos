@@ -160,6 +160,8 @@
                           repo = "t643s856@t643s856.repo.borgbase.com:repo";
                           excludes = [
                             "/home/eesim/.cache/"
+                            "/home/eesim/configs/mc-distant-horizons"
+                            "/home/eesim/configs/mc-arcadia"
                           ];
                           key = "/home/eesim/.ssh/id_ed25519";
                           passphrase = "/run/secrets/borgbase/nix-alpheratz";
@@ -188,6 +190,19 @@
 
                     options = {
                         openssh.enable = true;
+
+                        backup = {
+                          enable = true;
+                          user = "eesim";
+                          paths = [ "/home/eesim" ];
+                          repo = "ssh://p9h977h3@p9h977h3.repo.borgbase.com/./repo";
+                          excludes = [
+                            "/home/eesim/.cache"
+                          ];
+                          passphrase = "/run/secrets/backup/repo_password";
+                          key = "/home/eesim/.ssh/id_ed25519_borgbase";
+                          repeat = "daily";
+                        };
 
                         networking = {
                             firewall = {
