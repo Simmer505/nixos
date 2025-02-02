@@ -36,54 +36,6 @@
         secrets."caddy/porkbun_secret_key" = {};
     };
 
-    systemd.timers."mc-dh-backup" = {
-        wantedBy = [ "timers.target" ];
-        timerConfig = {
-            OnCalendar = "*-*-* *:00:00";
-            Persistent = true;
-        };
-    };
-
-    systemd.services."mc-dh-backup" = {
-        enable = true;
-        preStart = ''
-            ${pkgs.docker}/bin/docker exec mc-distant-horizons-mc-1 mc-send-to-console say Server backup starting in 5 minutes
-            sleep 5m
-        '';
-        postStart = ''
-            ${pkgs.docker}/bin/docker exec mc-distant-horizons-mc-1 mc-send-to-console say Server backup starting
-        '';
-        serviceConfig = {
-            Type = "oneshot"; 
-            User = "root";
-            ExecStart = ''
-                systemd-inhibit --who="borgmatic" \
-                --why="Prevent interrupting scheduled backup" \
-                ${pkgs.borgmatic}/bin/borgmatic -c /etc/nixos/hosts/diphda/mc-dh-backup.yaml --verbosity 1 --syslog-verbosity 1
-                '';
-        };
-    };
-
-    systemd.services."dl-manager" = {
-        enable = true;
-        after = [ "network.target" ];
-        wantedBy = [ "multi-user.target" ];
-        path = [ pkgs.bash pkgs.lftp ];
-        serviceConfig = {
-            Type = "simple";
-            User = "eesim";
-            Group = "acme";
-            WorkingDirectory = "/home/eesim/scripts";
-            ExecStart = ''
-                /home/eesim/scripts/dl_manager_tokio -vv \
-                    -c /var/lib/acme/download.simmer505.com/cert.pem \
-                    -k /var/lib/acme/download.simmer505.com/key.pem \
-                    --script-dir /home/eesim/scripts/ \
-                    0.0.0.0:11112
-            '';
-        };
-    };
-
     systemd.services."qbit-update-port" = {
         enable = true;
         path = [ pkgs.bash pkgs.docker pkgs.curl pkgs.netcat ];
@@ -102,21 +54,6 @@
         timerConfig = {
             OnCalendar = "*:0/5";
             Persistent = true;
-        };
-    };
-
-    services.mpd = {
-        enable = true;
-        musicDirectory = "/media/Music";
-        network.listenAddress = "any";
-    };
-
-    security.acme = {
-        acceptTerms = true;
-        defaults.email = "eesimmons9105@gmail.com";
-        certs."download.simmer505.com" = {
-            dnsProvider = "porkbun";
-            environmentFile = "${config.sops.secrets."porkbun.keytab".path}";
         };
     };
 
