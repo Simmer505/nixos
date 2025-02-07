@@ -37,6 +37,8 @@ local plugins = {
 
     'Vigemus/iron.nvim',
 
+    'junegunn/vim-easy-align',
+
 }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
