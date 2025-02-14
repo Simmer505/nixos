@@ -40,6 +40,14 @@ in
 
         hardware.opengl.enable = true;
 
+        i18n.inputMethod = {
+          enabled = "fcitx5";
+          fcitx5.addons = with pkgs; [
+            fcitx5-mozc
+            fcitx5-gtk
+          ];
+        };
+
         fonts = {
             packages = with pkgs; [
                 liberation_ttf

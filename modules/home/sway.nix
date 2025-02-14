@@ -127,8 +127,9 @@ in
                     }) 
                 ];
 
-                startup = [] 
-                ++ optionals gui.sway.desktop [
+                startup = [
+                  { command = "fcitx5 -d"; }
+                ] ++ optionals gui.sway.desktop [
                     { command = "vorta"; }
                     { command = "MOZ_ENABLE_WAYLAND=1 firefox"; }
                     { command = "sleep 20 && vesktop --enable-features=WebRTCPipeWireCapturer"; }
@@ -193,7 +194,7 @@ in
                 };
 
                 input."type:keyboard" = {
-                    xkb_layout = "us,de";
+                    xkb_layout = "us,de,jp";
                     xkb_options = "grp:toggle";
                 };
                 
@@ -253,10 +254,20 @@ in
 
             '';
 
-            extraSessionCommands = mkIf gui.secrets ''
+            extraSessionCommands = 
+              (if gui.secrets 
+              then ''
                 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh);
                 export SSH_AUTH_SOCK;
-            '';
+              ''
+              else "") + ''
+                # https://www.reddit.com/r/swaywm/comments/i6qlos/how_do_i_use_an_ime_with_sway/g1lk4xh?utm_source=share&utm_medium=web2x&context=3
+                export INPUT_METHOD=fcitx
+                export QT_IM_MODULE=fcitx
+                export GTK_IM_MODULE=fcitx
+                export XMODIFIERS=@im=fcitx
+                export XIM_SERVERS=fcitx
+              '';
         };
     };
 }
