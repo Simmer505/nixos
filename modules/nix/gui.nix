@@ -51,6 +51,9 @@ in
                 font-awesome
                 corefonts
                 carlito
+                roboto
+                source-sans
+                source-sans-pro
             ];
              fontconfig = {
 

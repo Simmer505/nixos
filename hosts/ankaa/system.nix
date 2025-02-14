@@ -24,6 +24,7 @@
         bottles
         inkscape
         orca-slicer
+        qemu
     ];
 
     services.hardware.openrgb.enable = true;
