@@ -194,7 +194,7 @@ in
                 };
 
                 input."type:keyboard" = {
-                    xkb_layout = "us,de,jp";
+                    xkb_layout = "us,de";
                     xkb_options = "grp:toggle";
                 };
                 
