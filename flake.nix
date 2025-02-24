@@ -113,6 +113,7 @@
                             enable = true;
                             lutris.enable = true;
                             minecraft.enable = true;
+                            ps4.enable = true;
                         };
 
                         common.nil.enable = true;
@@ -228,7 +229,7 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [ printrun citrix ];
+                        overlays = with overlays; [ printrun citrix shadps4 ];
                         config = {
                           allowUnfree = true;
                           permittedInsecurePackages = [
@@ -241,6 +242,7 @@
                             kickoff-dot-desktop = pkgs.callPackage ./pkgs/kickoff-dot-desktop.nix {};
                             jhelioviewer = pkgs.callPackage ./pkgs/jhelioviewer.nix {};
                             llama-cpp = llama-cpp.packages.${system}.rocm;
+                            shadps4 = pkgs.callPackage ./pkgs/shadps4.nix {};
                         }
                     );
 

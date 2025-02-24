@@ -40,6 +40,12 @@ in
             default = false;
         };
 
+        ps4.enable = mkOption {
+          description = "Whether to install ps4 emulator";
+          type = types.bool;
+          default = false;
+        };
+
         gamescope.enable = mkOption {
             description = "Whether to install gamescope";
             type = types.bool;
