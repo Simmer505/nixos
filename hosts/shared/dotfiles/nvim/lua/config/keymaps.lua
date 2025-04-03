@@ -10,6 +10,9 @@ vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>')
 vim.keymap.set('n', '<leader>fb', ':FzfLua buffers<CR>')
 vim.keymap.set('n', '<leader>rg', ':FzfLua grep_project<CR>')
 
+vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
+vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)')
+
 
 
 vim.keymap.set('i', '<S-Tab>', '<C-d>')
