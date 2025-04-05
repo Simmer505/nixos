@@ -11,7 +11,8 @@ rustPlatform.buildRustPackage {
             hash = "sha256-exMmqOkDKuyAEdda8gG/uF3+tnQzhJnOJK+sEtZbsZc=";
     };
 
-    cargoHash = "sha256-z3apcltBKNovwo+yOHxvzn53PPefr2lEzkGst25fGsM=";
+    useFetchCargoVendor = true;
+    cargoHash = "sha256-4x9kEBnYPhhYej0mNmV7jibw6sH8SxVau9tIkIVTen8=";
 
     meta = with lib; {
             description = "Smol program to read in relevant desktop files and print them in a kickoff compatible format";
