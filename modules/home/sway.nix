@@ -109,7 +109,7 @@ in
                         "${modifier}+Shift+0" = "move container to workspace 10";
                         "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
                         "${modifier}+Shift+c" = "reload";
-                        "${modifier}+Shift+s" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"/home/eesim/Pictures/$(date +'%s_grim.png')\"";
+                        "${modifier}+Shift+s" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"/home/eesim/Pictures/$(${pkgs.zenity}/bin/zenity --entry).png\"";
                         "${modifier}+Shift+q" = "kill";
                         "${modifier}+p" = "focus mode_toggle";
                         "XF86AudioPause" = "exec playerctl play-pause";
