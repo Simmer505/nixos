@@ -77,6 +77,11 @@
                             };
                         };
 
+                        term = {
+                          terminal = "kitty";
+                          font = "codelia";
+                        };
+
                         gui = {
                             enable = true;
                             protonmail = true;

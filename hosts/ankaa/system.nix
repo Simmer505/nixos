@@ -16,6 +16,39 @@
         };
     };
 
+    sops = {
+      defaultSopsFile = ../../secrets/ankaa/secrets.yaml;
+      age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+      secrets."Codelia-Regular.otf" = {
+        format = "binary";
+        sopsFile = ../../secrets/shared/Codelia-Regular;
+        owner = "eesim";
+        path = "/home/eesim/.local/share/fonts/Codelia Regular.otf";
+      };
+
+      secrets."Codelia-Bold.otf" = {
+        format = "binary";
+        sopsFile = ../../secrets/shared/Codelia-Bold;
+        owner = "eesim";
+        path = "/home/eesim/.local/share/fonts/Codelia Bold.otf";
+      };
+
+      secrets."Codelia-Italic.otf" = {
+        format = "binary";
+        sopsFile = ../../secrets/shared/Codelia-Italic;
+        owner = "eesim";
+        path = "/home/eesim/.local/share/fonts/Codelia Italic.otf";
+      };
+
+      secrets."Codelia-BoldItalic.otf" = {
+        format = "binary";
+        sopsFile = ../../secrets/shared/Codelia-BoldItalic;
+        owner = "eesim";
+        path = "/home/eesim/.local/share/fonts/Codelia BoldItalic.ttf";
+      };
+    };
+
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
         localPackages.x86_64-linux.llama-cpp

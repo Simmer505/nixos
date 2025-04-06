@@ -21,6 +21,12 @@ in
             type = types.enum [ "alacritty" "kitty" ];
             default = "alacritty";
           };
+
+        font = mkOption {
+            description = "Which font to use in terminal";
+            type = types.enum [ "default" "codelia" ];
+            default = "codelia";
+        };
     };
 
 }

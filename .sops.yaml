@@ -3,12 +3,21 @@ keys:
   - &admin_alpheratz age1gdtjn3jgvvvspa86q3lnklflnvyf3s75y2rw23l7nk7hwcsfpg7qkq7msr
   - &diphda age1rxqyz6watg05r3rzlme7grpgfgezhlt535gdl7psqys2ec8eegmqchfk4d
   - &alpheratz age1cla0k3yffcelphkrmgz5upc0chgtdef25ne833jeqtapceux59rqkmhxf7
+  - &ankaa age15z4s7nts7ls5h3tu5zesghvnm3kj2qk3dsr004g8rwy578mq4q4qew7wl7
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
     - age:
       - *admin_ankaa
       - *admin_alpheratz
+  - path_regex: secrets/shared/[^/]+\.(yaml|otf)$
+    key_groups:
+    - age:
+      - *admin_ankaa
+      - *admin_alpheratz
+      - *alpheratz
+      - *ankaa
+      - *diphda
   - path_regex: secrets/ankaa/[^/]+\.yaml$
     key_groups:
     - age:
