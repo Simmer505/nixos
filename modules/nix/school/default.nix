@@ -15,6 +15,9 @@ in
             xournalpp
             libreoffice
             anki
-        ] ++ optional cfg.citrix citrix;
+        ] 
+        ++ optional cfg.citrix citrix
+        ++ optional cfg.kicad kicad
+        ++ optional cfg.logisim logisim-evolution;
     };
 }
