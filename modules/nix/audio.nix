@@ -12,7 +12,7 @@ in
     config = {
         environment.systemPackages = with pkgs; []
             ++ optional cfg.pipewire.enable pulseaudio
-            ++ optional cfg.music.enable feishin
+            ++ optional cfg.music.enable supersonic
             ++ optional cfg.tools.helvum helvum
             ++ optional cfg.tools.easyeffects easyeffects
             ++ optional cfg.tools.pavucontrol pavucontrol;

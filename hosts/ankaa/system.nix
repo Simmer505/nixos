@@ -58,6 +58,7 @@
         inkscape
         orca-slicer
         qemu
+        protonvpn-gui
     ];
 
     services.hardware.openrgb.enable = true;
