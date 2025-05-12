@@ -38,7 +38,7 @@
     };
 
   fileSystems."/media" = 
-  { device = "192.168.1.100:/volume1/Media";
+  { device = "10.137.177.10:/volume1/Media";
     fsType = "nfs";
   };
 
