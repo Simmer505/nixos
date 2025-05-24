@@ -195,7 +195,7 @@ in
 
                 input."type:keyboard" = {
                     xkb_layout = "us,de";
-                    xkb_options = "grp:toggle";
+                    xkb_options = "grp:lctrl_lalt_toggle,lv3:ralt_switch";
                 };
                 
                 output = gui.monitors;
