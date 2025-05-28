@@ -92,18 +92,17 @@
 
     networking.wg-quick.interfaces = {
         wg0 = {
-            address = [ "10.0.0.2/32" ];
+            address = [ "10.137.175.3/32" ];
             listenPort = 51820;
             privateKeyFile = "/run/secrets/wireguard/private";
-            dns = [ "10.0.0.1" ];
+            dns = [ "10.137.175.1" ];
             autostart = true;
 
             peers = [
                 {
                     publicKey = "sWdXHlBqH+tAgSl0Tqr46sfKvgFN/vMDiuN08HjzaSg=";
-                    presharedKeyFile = "/run/secrets/wireguard/preshared";
                     allowedIPs = [ "0.0.0.0/0" "::/0" ];
-                    endpoint = "jellyfin.simmer505.com:51820";
+                    endpoint = "mc.simmer505.com:51820";
                 }
             ];
         };
