@@ -1,5 +1,6 @@
 { lib
 , pkgs
+, localPackages
 , config
 , systemConfig
 , utils
@@ -110,6 +111,7 @@ in
                         "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
                         "${modifier}+Shift+c" = "reload";
                         "${modifier}+Shift+s" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" \"/home/eesim/Pictures/$(${pkgs.zenity}/bin/zenity --entry).png\"";
+                        "${modifier}+Shift+o" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${localPackages.x86_64-linux.gazou}/bin/gazou | tail -n +2 | ${pkgs.wl-clipboard}/bin/wl-copy'";
                         "${modifier}+Shift+q" = "kill";
                         "${modifier}+p" = "focus mode_toggle";
                         "XF86AudioPause" = "exec playerctl play-pause";

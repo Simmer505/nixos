@@ -66,6 +66,7 @@
         localPackages.x86_64-linux.jhelioviewer
         bottles
         quartus-prime-lite
+        discord
     ];
 
     services.printing.enable = false;

@@ -247,6 +247,7 @@
                             jhelioviewer = pkgs.callPackage ./pkgs/jhelioviewer.nix {};
                             llama-cpp = llama-cpp.packages.${system}.rocm;
                             shadps4 = pkgs.callPackage ./pkgs/shadps4.nix {};
+                            gazou = pkgs.callPackage ./pkgs/gazou.nix {};
                         }
                     );
 
@@ -284,6 +285,7 @@
                                 home-manager.useUserPackages = true;
                                 home-manager.extraSpecialArgs = { 
                                     inherit utils;
+                                    inherit localPackages;
                                     systemConfig = config.options;
                                 };
 
