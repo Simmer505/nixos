@@ -31,6 +31,12 @@
       options = [ "subvol=nix" ];
     };
 
+  fileSystems."/mnt/drive0" = 
+    { device = "/dev/sr0";
+      fsType = "auto"; 
+      options = [ "ro" "user" "noauto" "unhide" ];
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

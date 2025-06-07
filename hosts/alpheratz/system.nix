@@ -67,6 +67,7 @@
         bottles
         quartus-prime-lite
         discord
+        wine
     ];
 
     services.printing.enable = false;
@@ -118,7 +119,7 @@
     # Define a user account.
     users.users.eesim = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "video" "audio" "networkmanager" ];
+        extraGroups = [ "wheel" "video" "audio" "networkmanager" "cdrom" ];
         shell = pkgs.fish;
     };
 
