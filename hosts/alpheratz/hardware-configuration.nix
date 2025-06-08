@@ -31,11 +31,12 @@
       options = [ "subvol=nix" ];
     };
 
-  fileSystems."/mnt/drive0" = 
-    { device = "/dev/sr0";
-      fsType = "auto"; 
-      options = [ "ro" "user" "noauto" "unhide" ];
-    };
+# Remove comments for optical drive in wine
+#  fileSystems."/mnt/drive0" = 
+#    { device = "/dev/sr0";
+#      fsType = "auto"; 
+#      options = [ "ro" "user" "noauto" "unhide" ];
+#    };
 
   swapDevices = [ ];
 

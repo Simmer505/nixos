@@ -114,6 +114,7 @@ in
                         "${modifier}+Shift+o" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${localPackages.x86_64-linux.gazou}/bin/gazou | tail -n +2 | ${pkgs.wl-clipboard}/bin/wl-copy'";
                         "${modifier}+Shift+q" = "kill";
                         "${modifier}+p" = "focus mode_toggle";
+                        "${modifier}+Control+b" = "exec bluetoothctl connect 18:3F:70:62:A5:3C";
                         "XF86AudioPause" = "exec playerctl play-pause";
                         "XF86AudioNext" = "exec playerctl next";
                         "XF86AudioPrev" = "exec playerctl previous";
