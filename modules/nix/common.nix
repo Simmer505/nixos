@@ -41,6 +41,8 @@ in
                     main = mkMerge [
                         (mkIf (cfg.caps == "ctrl-esc") { capslock = "overload(control, esc)"; })
                         (mkIf (cfg.caps == "esc") { capslock = "esc"; })
+                        { rightcontrol = "rightcontrol"; }
+                        { rightshift = "rightshift"; }
                     ];
                     altgr = mkMerge [
                         { "-" = "macro(C-S-u 2 0 1 4 space)"; }
