@@ -111,14 +111,13 @@
 
                         school = {
                             enable = true;
-                            citrix = true;
+                            citrix = false;
                         };
 
                         games = {
                             enable = true;
                             lutris.enable = true;
                             minecraft.enable = true;
-                            ps4.enable = true;
                         };
 
                         common.nil.enable = true;
@@ -234,7 +233,7 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [ printrun citrix shadps4 ];
+                        overlays = with overlays; [ printrun shadps4 ];
                         config = {
                           allowUnfree = true;
                           permittedInsecurePackages = [

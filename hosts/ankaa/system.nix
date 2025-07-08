@@ -51,8 +51,6 @@
 
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
-        localPackages.x86_64-linux.llama-cpp
-        printrun
         pciutils
         bottles
         inkscape
@@ -96,8 +94,6 @@
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
-
-    programs.ssh.startAgent = true;
 
     # Define a user account.
     users.users.eesim = {
