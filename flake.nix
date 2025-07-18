@@ -85,6 +85,7 @@
                         gui = {
                             enable = true;
                             protonmail = true;
+                            secrets = true;
                             gtk = false;
 
                             sway = {
