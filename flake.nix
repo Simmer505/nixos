@@ -164,7 +164,7 @@
 
                         school = {
                             enable = true;
-                            citrix = true;
+                            citrix = false;
                         };
 
                         games = {
