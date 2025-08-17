@@ -112,7 +112,7 @@
 
                         school = {
                             enable = true;
-                            citrix = false;
+                            citrix = true;
                         };
 
                         games = {
@@ -239,8 +239,19 @@
                           allowUnfree = true;
                           permittedInsecurePackages = [
                             "electron-31.7.7"
+                            # TODO: Remove when fixed https://github.com/NixOS/nixpkgs/issues/433004
+                            "libsoup-2.74.3"
+                            "libxml2-2.13.8"
                           ];
                         };
+                    };
+
+                    # TODO: Remove when Citrix is fixed
+                    pkgs_stable_tmp = import nixpkgs-stable {
+                      inherit system; 
+                      config = {
+                        allowUnfree = true;   
+                      };
                     };
 
                     localPackages = pkgs.lib.genAttrs flake-utils.lib.defaultSystems (system: {
@@ -268,6 +279,7 @@
                         specialArgs = {
                             inherit localPackages;
                             inherit pkgs;
+                            inherit pkgs_stable_tmp;
                         };
                         modules = [
                             {
