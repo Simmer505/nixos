@@ -65,8 +65,10 @@
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
         bottles
+        matlab
         discord
         wine
+        matlab-language-server
     ];
 
     services.printing.enable = false;

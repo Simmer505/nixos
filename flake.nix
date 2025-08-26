@@ -18,6 +18,8 @@
 
         llama-cpp.url = "github:ggerganov/llama.cpp";
 
+        nix-matlab.url = "gitlab:doronbehar/nix-matlab";
+
     };
 
     outputs = inputs@{ self
@@ -28,6 +30,7 @@
                      , flake-utils
                      , sops-nix
                      , llama-cpp
+                     , nix-matlab
                      , ...
                      }:
         let
@@ -234,7 +237,7 @@
 
                     pkgs = import nixpkgs {
                         inherit system;
-                        overlays = with overlays; [ printrun shadps4 ];
+                        overlays = with overlays; [ printrun shadps4 nix-matlab.overlay ];
                         config = {
                           allowUnfree = true;
                           permittedInsecurePackages = [

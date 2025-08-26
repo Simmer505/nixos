@@ -14,6 +14,14 @@ iron.setup {
       python = {
         command = { "python3" },  -- or { "ipython", "--no-autoindent" }
         format = require("iron.fts.common").bracketed_paste_python
+      },
+      matlab = {
+        command = { 
+            "matlab",
+            "-nosplash",
+            "-nodesktop"
+        },
+        
       }
     },
     -- How the repl window will be displayed

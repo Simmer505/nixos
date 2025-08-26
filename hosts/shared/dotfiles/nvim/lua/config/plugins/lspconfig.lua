@@ -24,6 +24,16 @@ lspconfig.rust_analyzer.setup {
     },
 }
 
+lspconfig.matlab_ls.setup {
+    capabilities = capabilities,
+    settings = {
+        MATLAB = {
+            indexWorkspace = false,
+            installPath = "",
+        },
+    },
+}
+
 lspconfig.omnisharp.setup {
     cmd = { "dotnet", "/usr/lib/omnisharp-roslyn/OmniSharp.dll"}
 }
