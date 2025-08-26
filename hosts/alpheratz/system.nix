@@ -65,7 +65,6 @@
     environment.systemPackages = with pkgs; [
         localPackages.x86_64-linux.jhelioviewer
         bottles
-        quartus-prime-lite
         discord
         wine
     ];
